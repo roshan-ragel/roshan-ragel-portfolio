@@ -8,6 +8,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Hero section with background image */
+        .hero {
+            background-image: url('hero-background.jpg'); /* Replace with your image filename */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        /* Dark overlay for better text readability */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 22, 18, 0.75); /* Dark overlay */
+            z-index: 0;
+        }
+
+        /* Ensure content appears above overlay */
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -26,7 +54,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Background Image -->
     <section class="hero">
         <div class="hero-content">
             <h1>ROSHAN G. RAGEL</h1>
