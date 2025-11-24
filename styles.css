@@ -8,24 +8,133 @@
     --overlay: rgba(26, 22, 18, 0.85);
 }
 
-/* About Page Specific Colors - Teal/Cyan Theme */
+/* About Page Specific Colors - Teal/Cyan Theme with White Boxes */
 body.about-page {
     --primary-bg: #0d3d3d;
-    --secondary-bg: #1a5555;
-    --accent-gold: #4dd0e1;
-    --accent-copper: #26c6da;
-    --text-primary: #ffffff;
-    --text-secondary: #b0e0e6;
+    --secondary-bg: #ffffff;
+    --accent-gold: #26c6da;
+    --accent-copper: #4dd0e1;
+    --text-primary: #333333;
+    --text-secondary: #555555;
     --overlay: rgba(13, 61, 61, 0.85);
-    background: var(--primary-bg);
+    background: linear-gradient(135deg, #0d3d3d 0%, #1a5555 100%);
 }
 
 body.about-page nav {
     background: rgba(13, 61, 61, 0.95);
 }
 
+body.about-page nav .logo {
+    color: #4dd0e1;
+}
+
+body.about-page nav .nav-links a {
+    color: #b0e0e6;
+}
+
+body.about-page nav .nav-links a:hover,
+body.about-page nav .nav-links a.active {
+    color: #4dd0e1;
+}
+
 body.about-page .page-header {
     background: linear-gradient(135deg, #0d3d3d 0%, #1a5555 100%);
+}
+
+body.about-page .page-header h1 {
+    background: linear-gradient(135deg, #4dd0e1 0%, #26c6da 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.about-page .page-header p {
+    color: #b0e0e6;
+}
+
+/* White boxes for about page */
+body.about-page .about-content {
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+body.about-page .about-text p {
+    color: #333333;
+}
+
+body.about-page .content-section h2 {
+    color: #26c6da;
+}
+
+body.about-page .card,
+body.about-page .list-item,
+body.about-page .student-card,
+body.about-page .year-section,
+body.about-page .supervision-note,
+body.about-page .publications-note {
+    background: #ffffff;
+    border-color: rgba(77, 208, 225, 0.3);
+}
+
+body.about-page .card:hover,
+body.about-page .list-item:hover,
+body.about-page .student-card:hover,
+body.about-page .year-section:hover {
+    border-color: #26c6da;
+    box-shadow: 0 10px 30px rgba(77, 208, 225, 0.15);
+}
+
+body.about-page .card h3,
+body.about-page .list-item h3,
+body.about-page .student-info h4 {
+    color: #26c6da;
+}
+
+body.about-page .card p,
+body.about-page .list-item p,
+body.about-page .student-info p,
+body.about-page .pub-title,
+body.about-page .pub-authors {
+    color: #333333;
+}
+
+body.about-page .date,
+body.about-page .student-supervision,
+body.about-page .student-topic {
+    color: #666666;
+}
+
+body.about-page .year-header {
+    color: #26c6da;
+    background: #ffffff;
+}
+
+body.about-page .year-header:hover {
+    background: rgba(77, 208, 225, 0.1);
+}
+
+body.about-page .year-content {
+    background: #ffffff;
+    border-top-color: rgba(77, 208, 225, 0.2);
+}
+
+body.about-page .resource-link {
+    color: #26c6da;
+}
+
+body.about-page .resource-link:hover {
+    color: #4dd0e1;
+}
+
+body.about-page footer {
+    background: rgba(13, 61, 61, 0.95);
+    border-top-color: rgba(77, 208, 225, 0.3);
+}
+
+body.about-page footer p {
+    color: #b0e0e6;
 }
 
 * {
