@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos | Roshan G. Ragel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="logo">Roshan G. Ragel</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="about.html">About</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="podcasts.html">Podcasts</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="speaking.html">Speaking</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Videos</h1>
+        <p>Lectures and Presentations</p>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="content-section fade-in">
+            <h2>Featured Lectures</h2>
+            <div class="grid-2">
+                <div class="video-card">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(184, 115, 51, 0.2)); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 4rem; color: var(--accent-gold);">▶</span>
+                    </div>
+                    <div class="video-overlay">
+                        <h3>Introduction to Computer Architecture</h3>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(184, 115, 51, 0.3), rgba(212, 175, 55, 0.2)); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 4rem; color: var(--accent-gold);">▶</span>
+                    </div>
+                    <div class="video-overlay">
+                        <h3>Embedded Systems Design Principles</h3>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(184, 115, 51, 0.3)); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 4rem; color: var(--accent-gold);">▶</span>
+                    </div>
+                    <div class="video-overlay">
+                        <h3>Innovation in Engineering Education</h3>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(184, 115, 51, 0.2), rgba(212, 175, 55, 0.3)); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 4rem; color: var(--accent-gold);">▶</span>
+                    </div>
+                    <div class="video-overlay">
+                        <h3>Real-Time Operating Systems</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section fade-in fade-in-delay-1">
+            <h2>Conference Presentations</h2>
+            <div class="list-item">
+                <h3>Advanced Memory Architectures - IEEE Conference 2024</h3>
+                <p class="date">IEEE International Conference on Computer Design · March 2024</p>
+                <p>
+                    Keynote presentation on novel memory architecture designs for high-performance computing. 
+                    Exploring cache optimization strategies and emerging non-volatile memory technologies.
+                </p>
+                <p><a href="#" class="resource-link">Watch Video →</a></p>
+            </div>
+
+            <div class="list-item">
+                <h3>IoT and Embedded Systems - ACM Symposium 2024</h3>
+                <p class="date">ACM International Symposium on Embedded Systems · January 2024</p>
+                <p>
+                    Comprehensive overview of IoT architectures and the role of embedded systems in building 
+                    smart, connected environments. Case studies from industrial and consumer applications.
+                </p>
+                <p><a href="#" class="resource-link">Watch Video →</a></p>
+            </div>
+
+            <div class="list-item">
+                <h3>Engineering Education Transformation - ASEE Annual Conference 2023</h3>
+                <p class="date">American Society for Engineering Education · June 2023</p>
+                <p>
+                    Discussing innovative pedagogical approaches and technology integration in engineering 
+                    curricula. Sharing experiences and outcomes from implementing project-based learning.
+                </p>
+                <p><a href="#" class="resource-link">Watch Video →</a></p>
+            </div>
+        </div>
+
+        <div class="content-section fade-in fade-in-delay-2">
+            <h2>Tutorial Series</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Computer Architecture Basics</h3>
+                    <p class="meta">12 Videos · Beginner Level</p>
+                    <p>
+                        A comprehensive tutorial series covering fundamental concepts in computer architecture, 
+                        from basic logic gates to complex processor designs.
+                    </p>
+                    <p><a href="#" class="resource-link">View Playlist →</a></p>
+                </div>
+                <div class="card">
+                    <h3>Embedded C Programming</h3>
+                    <p class="meta">15 Videos · Intermediate Level</p>
+                    <p>
+                        Step-by-step tutorials on programming embedded systems using C, covering GPIO, 
+                        interrupts, timers, and communication protocols.
+                    </p>
+                    <p><a href="#" class="resource-link">View Playlist →</a></p>
+                </div>
+                <div class="card">
+                    <h3>FPGA Design with Verilog</h3>
+                    <p class="meta">10 Videos · Advanced Level</p>
+                    <p>
+                        Advanced tutorials on FPGA design and Verilog HDL, including practical projects 
+                        and industry best practices.
+                    </p>
+                    <p><a href="#" class="resource-link">View Playlist →</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section fade-in fade-in-delay-3">
+            <h2>Guest Lectures</h2>
+            <div class="list-item">
+                <h3>Hardware Security - Stanford University</h3>
+                <p class="date">Guest Lecture · November 2024</p>
+                <p>
+                    Invited lecture on hardware security challenges and solutions in modern computing systems, 
+                    covering side-channel attacks, secure boot mechanisms, and trusted execution environments.
+                </p>
+                <p><a href="#" class="resource-link">Watch Video →</a></p>
+            </div>
+
+            <div class="list-item">
+                <h3>Sustainable Computing - MIT</h3>
+                <p class="date">Guest Lecture · September 2024</p>
+                <p>
+                    Discussion on energy-efficient computing and sustainable design practices in hardware 
+                    and software development for reducing environmental impact.
+                </p>
+                <p><a href="#" class="resource-link">Watch Video →</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Roshan G. Ragel. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
