@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervision | Roshan G. Ragel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Student Cards Styling */
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .student-card {
+            background: var(--secondary-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .student-photo {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .student-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .student-photo i {
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.3);
+        }
+
+        .student-info {
+            padding: 1.5rem;
+        }
+
+        .student-info h4 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .student-degree {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--accent-gold);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .student-topic {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .student-supervision {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .supervision-note {
+            background: var(--secondary-bg);
+            border-left: 4px solid var(--accent-gold);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 3rem;
+        }
+
+        .supervision-note h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .supervision-note p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .supervision-note strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .section-divider {
+            margin: 3rem 0 2rem 0;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .section-title {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="logo">Roshan G. Ragel</a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="publications.html">PUBLICATIONS</a></li>
+                <li><a href="supervision.html" class="active">SUPERVISION</a></li>
+                <li><a href="podcasts.html">PODCASTS</a></li>
+                <li><a href="videos.html">VIDEOS</a></li>
+                <li><a href="speaking.html">SPEAKING</a></li>
+                <li><a href="resources.html">RESOURCES</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Supervision</h1>
+        <p>Postgraduate Research Students</p>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Introduction -->
+        <div class="content-section fade-in">
+            <p style="color: var(--text-primary); line-height: 1.8; font-size: 1.1rem; margin-bottom: 2rem;">
+                Prof. Roshan G. Ragel supervises a diverse group of postgraduate research students across various domains 
+                including AI/ML, Bioinformatics, IoT, Computer Vision, and Security. His mentorship spans both PhD and Masters 
+                programs, often in collaboration with international institutions.
+            </p>
+
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">PhD Candidates</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Masters Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Total Students</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PhD Students Section -->
+        <div class="content-section fade-in fade-in-delay-1">
+            <h2 class="section-title">
+                <i class="fas fa-graduation-cap"></i>
+                PhD Candidates
+            </h2>
+            
+            <div class="students-grid">
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/mathuranthagaa-selvaratnam.jpg" alt="Mathuranthagaa Selvaratnam" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Mathuranthagaa Selvaratnam</h4>
+                        <span class="student-degree">PhD Candidate</span>
+                        <p class="student-supervision">Co-supervised with Muttukrishnan Rajarajan, City, University of London</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/romiyal-george.jpg" alt="Romiyal George" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Romiyal George</h4>
+                        <span class="student-degree">PhD Candidate</span>
+                        <p class="student-topic">Plant Diseases Detection</p>
+                        <p class="student-supervision">Co-supervised with Thuseethan Selvarajah, Charles Darwin University, Australia</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/m-santhanakrishnan.jpg" alt="M Santhanakrishnan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>M Santhanakrishnan</h4>
+                        <span class="student-degree">PhD Candidate</span>
+                        <p class="student-supervision">Co-supervised with Thuseethan Selvarajah, Charles Darwin University, Australia and Siyamalan Manivannan, University of Jaffna</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/kanagasabai-thiruthanigesan.jpg" alt="Kanagasabai Thiruthanigesan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Kanagasabai Thiruthanigesan</h4>
+                        <span class="student-degree">PhD Candidate</span>
+                        <p class="student-supervision">Co-supervised with Ruwan Nawarathna, CS, UoP</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/roshan-pushpakumara.jpg" alt="Roshan Pushpakumara" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Roshan Pushpakumara</h4>
+                        <span class="student-degree">PhD Candidate</span>
+                        <p class="student-supervision">Co-supervised with Isuru Nawinne</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/s-nimishan.jpg" alt="S Nimishan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>S Nimishan</h4>
+                        <span class="student-degree">PhD Candidate</span>
+                        <p class="student-supervision">Co-supervised with Thuseethan Selvarajah, Charles Darwin University, Australia and S. Vasanthapriyan (SUSL)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Masters Students Section -->
+        <div class="content-section fade-in fade-in-delay-2">
+            <div class="section-divider"></div>
+            <h2 class="section-title">
+                <i class="fas fa-user-graduate"></i>
+                Masters Candidates
+            </h2>
+            
+            <div class="students-grid">
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/anjana-senanayake.jpg" alt="Anjana Senanayake" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Anjana Senanayake</h4>
+                        <span class="student-degree">MPhil</span>
+                        <p class="student-supervision">Co-supervised with Hasindu Gamaarachchi (UNSW, Sydney) and Damayanthi Herath (UoP)</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/rukshani-puvanendran.jpg" alt="Rukshani Puvanendran" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Rukshani Puvanendran</h4>
+                        <span class="student-degree">MPhil Candidate</span>
+                        <p class="student-supervision">Co-supervised with Asanka P. Sayakkara (UCSC)</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/rasendram-muralitharan.jpg" alt="Rasendram Muralitharan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Rasendram Muralitharan</h4>
+                        <span class="student-degree">MPhil Candidate</span>
+                        <p class="student-supervision">Co-supervised with Upul Jayasinghe (UoP)</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/sandaruwan-herath.jpg" alt="Sandaruwan Herath" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Sandaruwan Herath</h4>
+                        <span class="student-degree">MPhil Candidate</span>
+                        <p class="student-supervision">Co-supervised with Prabhath Gunathilake</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/warunika-hippola.jpg" alt="Warunika Hippola" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Warunika Hippola</h4>
+                        <span class="student-degree">MPhil Candidate</span>
+                        <p class="student-supervision">Co-supervised with Isuru Nawinne</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/hasini-vindiya-athauda.jpg" alt="Hasini Vindiya Athauda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Hasini Vindiya Athauda</h4>
+                        <span class="student-degree">MPhil Candidate</span>
+                        <p class="student-supervision">Co-supervised with Upul Jayasinghe</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/h-hashan.jpg" alt="H Hashan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>H Hashan</h4>
+                        <span class="student-degree">MPhil Candidate</span>
+                        <p class="student-supervision">Co-supervised with Asitha Bandaranayake (UoP)</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/dinusha-premasiri.jpg" alt="Dinusha Premasiri" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Dinusha Premasiri</h4>
+                        <span class="student-degree">MPhil Candidate</span>
+                        <p class="student-supervision">Co-supervised with Isuru Nawinne</p>
+                    </div>
+                </div>
+
+                <div class="student-card">
+                    <div class="student-photo">
+                        <img src="students/charunika-dampalessa.jpg" alt="Charunika Dampalessa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="fas fa-user-graduate" style="display: none;"></i>
+                    </div>
+                    <div class="student-info">
+                        <h4>Charunika Dampalessa</h4>
+                        <span class="student-degree">MSc by Research Candidate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supervision Availability -->
+        <div class="content-section fade-in fade-in-delay-3">
+            <div class="supervision-note">
+                <h3><i class="fas fa-info-circle"></i> Available for Supervision</h3>
+                <p style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem;">
+                    Yes (limited availability)
+                </p>
+                <p>
+                    Prof. Ragel is accepting new postgraduate students for PhD and Masters programs with limited availability. 
+                    Research areas include:
+                </p>
+                <ul style="color: var(--text-secondary); line-height: 2; margin: 1rem 0 1.5rem 2rem;">
+                    <li>Internet of Things (IoT)</li>
+                    <li>Artificial Intelligence & Machine Learning</li>
+                    <li>Bioinformatics & Computational Biology</li>
+                    <li>Computer Architecture & Embedded Systems</li>
+                    <li>Wearable Computing & Health Informatics</li>
+                    <li>Engineering Education & Pedagogy</li>
+                    <li>Computer Security & Cryptography</li>
+                </ul>
+                <p>
+                    For supervision inquiries, please contact via email at 
+                    <a href="mailto:roshanr@pdn.ac.lk" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">roshanr@pdn.ac.lk</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Roshan G. Ragel. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
