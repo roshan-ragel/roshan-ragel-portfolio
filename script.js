@@ -60,3 +60,32 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
 });
+```
+
+## **Why You Don't Need to Change `script.js`:**
+
+✅ **Mobile menu toggle** - Works for all pages  
+✅ **Active navigation highlighting** - Automatically detects current page  
+✅ **Smooth scroll** - Works for anchor links  
+✅ **Fade-in animations** - Works with Intersection Observer  
+
+The `resources.html` and `supervision.html` files I created already include their **own inline JavaScript** for:
+- API fetching (resources.html)
+- Batch toggling (resources.html)
+- No additional JS needed (supervision.html)
+
+---
+
+## **Your Complete File Structure:**
+```
+roshan-ragel-portfolio/
+├── index.html
+├── about.html
+├── publications.html
+├── supervision.html       ← NEW (with students)
+├── podcasts.html
+├── videos.html
+├── speaking.html
+├── resources.html         ← UPDATED (with API projects)
+├── styles.css
+└── script.js              ← NO CHANGES NEEDED
