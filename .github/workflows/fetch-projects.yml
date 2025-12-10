@@ -1,0 +1,113 @@
+name: Fetch Projects Data
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch-projects:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 lxml
+      
+      - name: Create Python script
+        run: |
+          cat > fetch_projects.py << 'SCRIPT_END'
+          import requests
+          from bs4 import BeautifulSoup
+          import json
+          import re
+          from datetime import datetime
+
+          print("Starting to fetch projects...")
+
+          STAFF_URL = 'https://people.ce.pdn.ac.lk/staff/academic/roshan-ragel/'
+
+          try:
+              headers = {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+              }
+              
+              response = requests.get(STAFF_URL, headers=headers, timeout=30)
+              response.raise_for_status()
+              print(f"Successfully fetched HTML ({len(response.text)} chars)")
+              
+              soup = BeautifulSoup(response.text, 'html.parser')
+              projects_by_batch = {}
+              
+              # Find all h5 tags
+              all_h5 = soup.find_all('h5')
+              print(f"Found {len(all_h5)} h5 elements")
+              
+              for heading in all_h5:
+                  text = heading.get_text().strip()
+                  match = re.match(r'E(\d{2})\s*\((\d+)\s*projects?\)', text, re.IGNORECASE)
+                  
+                  if match:
+                      batch = f"E{match.group(1)}"
+                      expected_count = int(match.group(2))
+                      print(f"Found batch: {batch} ({expected_count} projects)")
+                      
+                      projects = []
+                      current = heading.find_next_sibling()
+                      
+                      while current and len(projects) < expected_count:
+                          if current.name == 'h5':
+                              break
+                          
+                          h6 = current.find('h6')
+                          link = current.find('a', href=lambda x: x and 'projects.ce.pdn.ac.lk' in str(x))
+                          
+                          if h6 and link:
+                              projects.append({
+                                  'title': h6.get_text().strip(),
+                                  'url': link.get('href', '')
+                              })
+                          
+                          current = current.find_next_sibling()
+                      
+                      if projects:
+                          projects_by_batch[batch] = projects
+                          print(f"Added {len(projects)} projects for {batch}")
+              
+              output = {
+                  'last_updated': datetime.utcnow().isoformat() + 'Z',
+                  'total_projects': sum(len(p) for p in projects_by_batch.values()),
+                  'total_batches': len(projects_by_batch),
+                  'projects': projects_by_batch
+              }
+              
+              with open('projects-data.json', 'w', encoding='utf-8') as f:
+                  json.dump(output, f, indent=2, ensure_ascii=False)
+              
+              print(f"\nSuccess! Saved {output['total_projects']} projects across {output['total_batches']} batches")
+              
+          except Exception as e:
+              print(f"Error: {e}")
+              import traceback
+              traceback.print_exc()
+              exit(1)
+          SCRIPT_END
+      
+      - name: Run Python script
+        run: python fetch_projects.py
+      
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add projects-data.json
+          git diff --staged --quiet || git commit -m "Update projects data [automated]"
+          git push
