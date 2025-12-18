@@ -196,11 +196,9 @@
         .student-card {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 2rem 1.5rem;
             background: white;
             border-radius: 8px;
+            overflow: hidden;
             border: 1px solid rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -212,17 +210,13 @@
             transform: translateY(-2px);
         }
 
-        .student-photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
+        .student-header-box {
+            width: 100%;
+            height: 120px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-            padding: 4px;
-            margin-bottom: 1rem;
-            animation: gradient-rotate 3s ease infinite;
             background-size: 200% 200%;
+            animation: gradient-rotate 3s ease infinite;
+            position: relative;
         }
 
         @keyframes gradient-rotate {
@@ -237,16 +231,9 @@
             }
         }
 
-        .student-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid white;
-        }
-
         .student-info {
-            width: 100%;
+            padding: 1.5rem;
+            text-align: center;
         }
 
         .student-info h4 {
@@ -397,9 +384,7 @@
             
             <div class="students-grid">
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/mathuranthagaa-selvaratnam.jpg" alt="Mathuranthagaa Selvaratnam" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Mathuranthagaa Selvaratnam</h4>
                         <p class="student-degree">PhD Candidate</p>
@@ -408,9 +393,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/romiyal-george.jpg" alt="Romiyal George" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Romiyal George</h4>
                         <p class="student-degree">PhD Candidate</p>
@@ -420,9 +403,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/m-santhanakrishnan.jpg" alt="M Santhanakrishnan" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>M Santhanakrishnan</h4>
                         <p class="student-degree">PhD Candidate</p>
@@ -431,9 +412,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/kanagasabai-thiruthanigesan.jpg" alt="Kanagasabai Thiruthanigesan" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Kanagasabai Thiruthanigesan</h4>
                         <p class="student-degree">PhD Candidate</p>
@@ -442,9 +421,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/roshan-pushpakumara.jpg" alt="Roshan Pushpakumara" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Roshan Pushpakumara</h4>
                         <p class="student-degree">PhD Candidate</p>
@@ -453,9 +430,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/s-nimishan.jpg" alt="S Nimishan" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>S Nimishan</h4>
                         <p class="student-degree">PhD Candidate</p>
@@ -468,9 +443,7 @@
             
             <div class="students-grid">
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/anjana-senanayake.jpg" alt="Anjana Senanayake" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Anjana Senanayake</h4>
                         <p class="student-degree">MPhil</p>
@@ -479,9 +452,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/rukshani-puvanendran.jpg" alt="Rukshani Puvanendran" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Rukshani Puvanendran</h4>
                         <p class="student-degree">MPhil Candidate</p>
@@ -490,9 +461,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/rasendram-muralitharan.jpg" alt="Rasendram Muralitharan" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Rasendram Muralitharan</h4>
                         <p class="student-degree">MPhil Candidate</p>
@@ -501,9 +470,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/sandaruwan-herath.jpg" alt="Sandaruwan Herath" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Sandaruwan Herath</h4>
                         <p class="student-degree">MPhil Candidate</p>
@@ -512,9 +479,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/warunika-hippola.jpg" alt="Warunika Hippola" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Warunika Hippola</h4>
                         <p class="student-degree">MPhil Candidate</p>
@@ -523,9 +488,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/hasini-vindiya-athauda.jpg" alt="Hasini Vindiya Athauda" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Hasini Vindiya Athauda</h4>
                         <p class="student-degree">MPhil Candidate</p>
@@ -534,9 +497,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/h-hashan.jpg" alt="H Hashan" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>H Hashan</h4>
                         <p class="student-degree">MPhil Candidate</p>
@@ -545,9 +506,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/dinusha-premasiri.jpg" alt="Dinusha Premasiri" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Dinusha Premasiri</h4>
                         <p class="student-degree">MPhil Candidate</p>
@@ -556,9 +515,7 @@
                 </div>
 
                 <div class="student-card">
-                    <div class="student-photo">
-                        <img src="students/charunika-dampalessa.jpg" alt="Charunika Dampalessa" onerror="this.src='students/placeholder.jpg'">
-                    </div>
+                    <div class="student-header-box"></div>
                     <div class="student-info">
                         <h4>Charunika Dampalessa</h4>
                         <p class="student-degree">MSc by Research Candidate</p>
