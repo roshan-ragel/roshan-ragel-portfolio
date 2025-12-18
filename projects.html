@@ -188,15 +188,17 @@
         /* Students Grid Styles */
         .students-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
 
         .student-card {
             display: flex;
-            gap: 1rem;
-            padding: 1.5rem;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
             background: white;
             border-radius: 8px;
             border: 1px solid rgba(0, 0, 0, 0.1);
@@ -211,12 +213,13 @@
         }
 
         .student-photo {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
             border: 3px solid var(--teal-border);
+            margin-bottom: 1rem;
         }
 
         .student-photo img {
@@ -226,7 +229,7 @@
         }
 
         .student-info {
-            flex: 1;
+            width: 100%;
         }
 
         .student-info h4 {
@@ -240,21 +243,21 @@
             color: #333;
             font-weight: 600;
             font-size: 0.9rem;
-            margin: 0.3rem 0;
+            margin: 0.5rem 0;
         }
 
         .student-topic {
             color: #666;
             font-size: 0.85rem;
-            margin: 0.3rem 0;
+            margin: 0.5rem 0;
             font-style: italic;
         }
 
         .student-supervision {
             color: #666;
             font-size: 0.85rem;
-            margin: 0.3rem 0;
-            line-height: 1.5;
+            margin: 0.5rem 0;
+            line-height: 1.6;
         }
 
         .supervision-note {
@@ -305,12 +308,6 @@
 
             .students-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .student-card {
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
             }
         }
     </style>
