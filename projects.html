@@ -349,7 +349,7 @@
                 const projects = projectsData[batch];
 
                 html += `
-                    <div class="batch-section ${index === 0 ? 'open' : ''}" data-batch="${batch}">
+                    <div class="batch-section" data-batch="${batch}">
                         <div class="batch-header" onclick="toggleBatch('${batch}')">
                             <div class="batch-title">${batch} (${projects.length} projects)</div>
                             <i class="fas fa-chevron-down batch-toggle"></i>
