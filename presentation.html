@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Roshan G. Ragel</title>
+    <title>Presentations | Roshan G. Ragel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Blog Page - Teal/Cyan Theme */
+        /* Presentations Page - Teal/Cyan Theme */
         body {
             background: linear-gradient(135deg, #0d3d3d 0%, #1a5555 100%);
             --primary-bg: #0d3d3d;
@@ -37,6 +37,11 @@
             color: #4dd0e1;
         }
 
+        nav .nav-links a.active,
+        nav .nav-links a[href="presentation.html"] {
+            color: #4dd0e1;
+        }
+
         nav .nav-links a::after {
             background: #4dd0e1;
         }
@@ -56,142 +61,35 @@
             color: #b0e0e6;
         }
 
-        /* Blog Grid Layout */
-        .blog-container {
-            max-width: 1400px;
+        /* Main Container */
+        .presentations-container {
+            max-width: 1200px;
             margin: 0 auto;
             padding: 3rem 2rem;
         }
 
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
 
-        /* Blog Card Styling */
-        .blog-card {
-            background: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(77, 208, 225, 0.2);
-        }
-
-        .blog-card-image {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .blog-card-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #26c6da;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-
-        .blog-card-excerpt {
-            color: #555555;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
-
-        .blog-card-meta {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .blog-card-date {
-            color: #888888;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .blog-card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
-
-        .blog-tag {
-            background: linear-gradient(135deg, rgba(38, 198, 218, 0.1) 0%, rgba(77, 208, 225, 0.1) 100%);
-            color: #26c6da;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            border: 1px solid rgba(38, 198, 218, 0.3);
-        }
-
-        .read-more {
-            display: inline-block;
-            color: #26c6da;
-            font-weight: 600;
-            text-decoration: none;
-            margin-top: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .read-more:hover {
-            color: #4dd0e1;
-            transform: translateX(5px);
-        }
-
-        .read-more::after {
-            content: " →";
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .read-more:hover::after {
-            transform: translateX(5px);
-        }
 
         /* Filter Section */
         .filter-section {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .filter-btn {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             color: #b0e0e6;
-            border: 1px solid rgba(77, 208, 225, 0.3);
-            padding: 0.6rem 1.5rem;
+            border: 1px solid rgba(77, 208, 225, 0.25);
+            padding: 0.5rem 1.3rem;
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
+            font-size: 0.9rem;
+            font-family: 'Work Sans', sans-serif;
         }
 
         .filter-btn:hover,
@@ -199,6 +97,114 @@
             background: #26c6da;
             color: #ffffff;
             border-color: #26c6da;
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.7rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid rgba(77,208,225,0.3);
+            background: rgba(255,255,255,0.07);
+            color: #e0f7fa;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input::placeholder {
+            color: rgba(176,224,230,0.5);
+        }
+
+        .search-input:focus {
+            border-color: #4dd0e1;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Presentation List */
+        .presentation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        /* Presentation Card */
+        .pres-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pres-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #26c6da, #4dd0e1);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .pres-card:hover {
+            transform: translateX(6px);
+            box-shadow: 0 6px 24px rgba(77, 208, 225, 0.18);
+        }
+
+        .pres-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #b0bec5;
+            min-width: 2.2rem;
+            padding-top: 0.15rem;
+        }
+
+        .pres-content {
+            flex: 1;
+        }
+
+        .pres-title {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a3a3a;
+            line-height: 1.4;
+            margin-bottom: 0.4rem;
+        }
+
+        .pres-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .pres-tag {
+            background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(77,208,225,0.1));
+            color: #26c6da;
+            padding: 0.15rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            border: 1px solid rgba(38,198,218,0.25);
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
         }
 
         /* Footer */
@@ -211,23 +217,30 @@
             color: #b0e0e6;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .blog-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #b0e0e6;
+            display: none;
+        }
 
-            .blog-container {
+        /* Mobile */
+        @media (max-width: 768px) {
+            .presentations-container {
                 padding: 2rem 1rem;
             }
 
-            .blog-card-image {
-                height: 220px;
+            .stats-bar {
+                gap: 1.5rem;
             }
 
-            .blog-card-title {
-                font-size: 1.3rem;
+            .pres-card {
+                padding: 1rem 1.2rem;
+            }
+
+            .pres-title {
+                font-size: 0.95rem;
             }
 
             .nav-links {
@@ -238,38 +251,28 @@
             .mobile-menu-btn {
                 color: #4dd0e1;
             }
-
-            .filter-section {
-                gap: 0.5rem;
-            }
-
-            .filter-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .blog-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
 
         /* Animation */
         .fade-in {
-            animation: fadeInUp 0.6s ease-out;
+            animation: fadeInUp 0.5s ease-out both;
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
+
+        .pres-card:nth-child(1)  { animation-delay: 0.03s; }
+        .pres-card:nth-child(2)  { animation-delay: 0.06s; }
+        .pres-card:nth-child(3)  { animation-delay: 0.09s; }
+        .pres-card:nth-child(4)  { animation-delay: 0.12s; }
+        .pres-card:nth-child(5)  { animation-delay: 0.15s; }
+        .pres-card:nth-child(6)  { animation-delay: 0.18s; }
+        .pres-card:nth-child(7)  { animation-delay: 0.21s; }
+        .pres-card:nth-child(8)  { animation-delay: 0.24s; }
+        .pres-card:nth-child(9)  { animation-delay: 0.27s; }
+        .pres-card:nth-child(10) { animation-delay: 0.30s; }
     </style>
 </head>
 <body>
@@ -285,7 +288,7 @@
                 <li><a href="podcasts.html">Podcasts</a></li>
                 <li><a href="videos.html">Videos</a></li>
                 <li><a href="speaking.html">Speaking</a></li>
-                 <li><a href="presentation.html">Presentation</a></li>
+                <li><a href="presentation.html" class="active">Presentation</a></li>
                 <li><a href="students.html">Students</a></li>
             </ul>
         </div>
@@ -293,213 +296,761 @@
 
     <!-- Page Header -->
     <header class="page-header">
-        <h1>Blog & Events</h1>
-        <p>Insights, updates, and highlights from speaking engagements and conferences</p>
+        <h1>Presentations</h1>
+        <p>Talks, keynotes, workshops, and sessions delivered at conferences, universities, and industry events</p>
     </header>
 
     <!-- Main Content -->
-    <main class="blog-container">
-        <!-- Filter Section -->
+    <main class="presentations-container">
+
+
+
+        <!-- Filter Buttons -->
         <div class="filter-section fade-in">
-            <button class="filter-btn active" onclick="filterPosts('all')">All Posts</button>
-            <button class="filter-btn" onclick="filterPosts('ai')">AI & Technology</button>
-            <button class="filter-btn" onclick="filterPosts('education')">Education</button>
-            <button class="filter-btn" onclick="filterPosts('conference')">Conferences</button>
-            <button class="filter-btn" onclick="filterPosts('keynote')">Keynotes</button>
+            <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+            <button class="filter-btn" onclick="filterCards('ai', this)">AI & GenAI</button>
+            <button class="filter-btn" onclick="filterCards('education', this)">Education</button>
+            <button class="filter-btn" onclick="filterCards('research', this)">Research</button>
+            <button class="filter-btn" onclick="filterCards('keynote', this)">Keynotes</button>
+            <button class="filter-btn" onclick="filterCards('conference', this)">Conferences</button>
+            <button class="filter-btn" onclick="filterCards('workshop', this)">Workshops</button>
         </div>
 
-        <!-- Blog Grid -->
-        <div class="blog-grid">
-            <!-- Blog Post 1 -->
-            <article class="blog-card fade-in" data-category="conference">
-                <img src="LKNOG.jpg" alt="LKNOG9 Conference" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">LKNOG9 | Building Resilient Internet Infrastructure for Sri Lanka</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 January 2025</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Honored to join the 9th Annual Conference of the Lanka Network Operators Group (LKNOG9) at the historic Galle Face Hotel, Colombo. This key gathering of network professionals, ISPs, policymakers, and academia reinforces our collective commitment to advancing Sri Lanka's Internet ecosystem.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Networking</span>
-                        <span class="blog-tag">Infrastructure</span>
-                        <span class="blog-tag">Conference</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 2 -->
-            <article class="blog-card fade-in" data-category="ai conference">
-                <img src="NREN.jpg" alt="APAN60 Regional Workshop" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">Asia Pacific | Generative AI for NREN Empowerment & Development</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 December 2024</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Proud to contribute to the APAN60 – AP-GAINED Regional Workshop at the Grand Hyatt Hotel, Hong Kong. I presented on Responsible AI and how we can navigate the opportunities and challenges of GenAI in the academic and research networking landscape.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Generative AI</span>
-                        <span class="blog-tag">NREN</span>
-                        <span class="blog-tag">Responsible AI</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 3 -->
-            <article class="blog-card fade-in" data-category="ai education">
-                <img src="HUAWEI.jpg" alt="Huawei Intelligent Education Forum" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">Empowering Education through Intelligent Transformation</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 December 2024</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Honored to represent LEARN at the Huawei Intelligent Education Forum 2025, part of APAN60 in Hong Kong. Exciting discussions around sovereign AI, talent development, and critical success factors for digital transformation.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Digital Transformation</span>
-                        <span class="blog-tag">Education</span>
-                        <span class="blog-tag">AI</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 4 -->
-            <article class="blog-card fade-in" data-category="ai education">
-                <img src="ai.jpg" alt="AI Research Workshop" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">Fast-Track Research with AI Tools & Techniques</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 August 2025</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Honoured to contribute as a resource person at the Hybrid Workshop on "Fast-Track Research with AI Tools & Techniques", held at gapHQ, Colombo 07—jointly organised by the Multidisciplinary AI Research Centre, University of Peradeniya, and gapHQ.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">AI Research</span>
-                        <span class="blog-tag">Workshop</span>
-                        <span class="blog-tag">Academia</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 5 -->
-            <article class="blog-card fade-in" data-category="education keynote">
-                <img src="principle.jpg" alt="School Principals Programme" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">Unlock the Future of Education with (Gen)AI</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 August 2025</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Honored to deliver a session at the Capacity Development Programme on ICT for School Principals 2025. My talk focused on the transformative role of Generative AI in reshaping teaching and learning, opportunities for personalized education, and the challenges of adopting AI ethically and inclusively.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Education Leadership</span>
-                        <span class="blog-tag">GenAI</span>
-                        <span class="blog-tag">K-12</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 6 -->
-            <article class="blog-card fade-in" data-category="ai education">
-                <img src="Accelerating .jpg" alt="iPURSE 2025 Workshop" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">Accelerating Research Through AI Tools</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 2025</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Delighted to be part of the iPURSE 2025 pre-conference workshop on "Accelerating Research Through AI Tools." We explored how generative AI can transform the research journey—helping students and researchers move faster, think deeper, and innovate further.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Research</span>
-                        <span class="blog-tag">AI Tools</span>
-                        <span class="blog-tag">University</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 7 -->
-            <article class="blog-card fade-in" data-category="ai conference">
-                <img src="APGAINED.jpg" alt="AP-GAINED+ 2025" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">Responsible AI: Navigating the Challenges of Generative AI Technology</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 August 2025</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Grateful to have been part of AP-GAINED+ 2025 in Laos—a regional initiative to strengthen Generative AI capacity for NRENs across Asia-Pacific. I emphasized why it's crucial that as AI transforms education, research, and industry, we build it on ethics, sustainability, and inclusivity.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">Responsible AI</span>
-                        <span class="blog-tag">NREN</span>
-                        <span class="blog-tag">Ethics</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 8 -->
-            <article class="blog-card fade-in" data-category="ai keynote">
-                <img src="AIEXPO.jpg" alt="National AI Expo" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">Talent and Skills – Building the Culture for AI-Driven Enterprises</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 2025</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Truly an honour to speak at the National AI Expo & Conference 2025, organised by the Ministry of Digital Economy and SLT-MOBITEL. My session focused on how we prepare our people and organisations to thrive in the age of AI, discussing the four essential layers of AI-ready organisations.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">AI Skills</span>
-                        <span class="blog-tag">Leadership</span>
-                        <span class="blog-tag">Enterprise</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 9 -->
-            <article class="blog-card fade-in" data-category="ai keynote">
-                <img src="insurance.jpg" alt="Insurance Congress 2025" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">Smart Insurance: Navigating the AI Driven Future</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 2025</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Honored to participate as a keynote speaker and panelist at the 22nd International Insurance Congress 2025, organized by the Sri Lanka Insurance Institute. It was a privilege to explore how technology and artificial intelligence are reshaping the future of the insurance industry.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">InsurTech</span>
-                        <span class="blog-tag">AI Innovation</span>
-                        <span class="blog-tag">Industry</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 10 -->
-            <article class="blog-card fade-in" data-category="ai education keynote">
-                <img src="southern.jpg" alt="Southern AI EXPO 2025" class="blog-card-image">
-                <div class="blog-card-content">
-                    <h2 class="blog-card-title">The Future of AI Careers and Higher Education</h2>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">📅 2025</span>
-                    </div>
-                    <p class="blog-card-excerpt">
-                        Honoured to deliver the Keynote Address at Southern AI EXPO & Conference - REXTRO 2025, hosted by the Faculty of Engineering, University of Ruhuna. My keynote focused on a critical message: Universities must stop treating AI as a niche subject and start treating it as a way of working.
-                    </p>
-                    <div class="blog-card-tags">
-                        <span class="blog-tag">AI Careers</span>
-                        <span class="blog-tag">Higher Education</span>
-                        <span class="blog-tag">Skills Development</span>
-                    </div>
-                </div>
-            </article>
+        <!-- Search -->
+        <div class="search-wrapper fade-in">
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍  Search presentations..." oninput="searchCards()">
         </div>
+
+        <!-- Presentation List -->
+        <div class="presentation-list" id="presList">
+
+            <div class="pres-card fade-in" data-tags="ai education keynote">
+                <span class="pres-number">01</span>
+                <div class="pres-content">
+                    <p class="pres-title">The Future of AI Careers and Higher Education</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai keynote">
+                <span class="pres-number">02</span>
+                <div class="pres-content">
+                    <p class="pres-title">Talent & Skills: Building the Culture for AI-Driven Enterprises</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Enterprise</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai keynote conference">
+                <span class="pres-number">03</span>
+                <div class="pres-content">
+                    <p class="pres-title">Smart Insurance: Navigating the AI Driven Future</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Industry</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai conference">
+                <span class="pres-number">04</span>
+                <div class="pres-content">
+                    <p class="pres-title">Responsible AI: Navigating the Challenges of Generative AI Technology</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Ethics</span>
+                        <span class="pres-tag">Conference</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai research workshop">
+                <span class="pres-number">05</span>
+                <div class="pres-content">
+                    <p class="pres-title">Fast-Track Your Research with AI Tools & Techniques</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Workshop</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai research workshop">
+                <span class="pres-number">06</span>
+                <div class="pres-content">
+                    <p class="pres-title">Accelerating Research Through AI Tools</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Workshop</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education keynote">
+                <span class="pres-number">07</span>
+                <div class="pres-content">
+                    <p class="pres-title">Unlock the Future of Education with (Gen)AI</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Keynote</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai conference">
+                <span class="pres-number">08</span>
+                <div class="pres-content">
+                    <p class="pres-title">AP-GAINED+: Scaling Generative AI Capacity for NRENs Across Asia-Pacific</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">NREN</span>
+                        <span class="pres-tag">Conference</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">09</span>
+                <div class="pres-content">
+                    <p class="pres-title">Empowering Research with AI Tools: Enhancing the Academic Research Process</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education conference">
+                <span class="pres-number">10</span>
+                <div class="pres-content">
+                    <p class="pres-title">Huawei Intelligent Education Forum 2025: Empowering Education through Intelligent Transformation</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Conference</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">11</span>
+                <div class="pres-content">
+                    <p class="pres-title">Libraries in the Age of AI: Safeguarding Truth and Empowering Knowledge</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Knowledge</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai conference">
+                <span class="pres-number">12</span>
+                <div class="pres-content">
+                    <p class="pres-title">Minds Over AI: Reclaiming Truth and Trust in the Digital Space – South Asian Call for Action</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Ethics</span>
+                        <span class="pres-tag">Conference</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai keynote">
+                <span class="pres-number">13</span>
+                <div class="pres-content">
+                    <p class="pres-title">From Data to Decisions: Generative AI and the Next Leap for Emerging Nations</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">Development</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai keynote">
+                <span class="pres-number">14</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI for CEOs: Leading the Intelligent Enterprise</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">Leadership</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education conference">
+                <span class="pres-number">15</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI Capacity Building for Education, Workforce Development, and Innovation Ecosystems</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Capacity Building</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">16</span>
+                <div class="pres-content">
+                    <p class="pres-title">Ethical Use of AI in Article Writing (NSF)</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Ethics</span>
+                        <span class="pres-tag">Research</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai conference">
+                <span class="pres-number">17</span>
+                <div class="pres-content">
+                    <p class="pres-title">Bridging AI and Agriculture: The Role of Generative Models in Sustainable Farming</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">AgriTech</span>
+                        <span class="pres-tag">Sustainability</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai keynote">
+                <span class="pres-number">18</span>
+                <div class="pres-content">
+                    <p class="pres-title">Charting Sri Lanka's AI Future: Reflections on National Direction and Global Relevance</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">Policy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai conference">
+                <span class="pres-number">19</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI at the Edge: IoT-Driven Intelligence for Agri-Tech and Healthcare</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">IoT</span>
+                        <span class="pres-tag">Healthcare</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">20</span>
+                <div class="pres-content">
+                    <p class="pres-title">Generative AI in Education and Research</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Research</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education keynote">
+                <span class="pres-number">21</span>
+                <div class="pres-content">
+                    <p class="pres-title">Reimagining Higher Education and Research in the GenAI Era: What's Next?</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Keynote</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">22</span>
+                <div class="pres-content">
+                    <p class="pres-title">Trustworthy Generative AI in Higher Education: From Quick Wins to Guardrails</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Ethics</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education workshop">
+                <span class="pres-number">23</span>
+                <div class="pres-content">
+                    <p class="pres-title">Meet AI: Tools for Exploratory Learning</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Workshop</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">24</span>
+                <div class="pres-content">
+                    <p class="pres-title">The Future of Work and University Curricula</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Workforce</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education workshop">
+                <span class="pres-number">25</span>
+                <div class="pres-content">
+                    <p class="pres-title">GenAI: Prompt Engineering Masterclass</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Workshop</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Prompt Engineering</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">26</span>
+                <div class="pres-content">
+                    <p class="pres-title">Ethical Use of GenAI: Navigating the Challenges of Generative AI Technology</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Ethics</span>
+                        <span class="pres-tag">Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">27</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI in Academia: Opportunities and Challenges</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Research</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">28</span>
+                <div class="pres-content">
+                    <p class="pres-title">Mathematical Modelling for AI</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Mathematics</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">29</span>
+                <div class="pres-content">
+                    <p class="pres-title">GenAI in Research – What Every CS Student Should Know</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">30</span>
+                <div class="pres-content">
+                    <p class="pres-title">Using Generative AI for Education and Research</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Research</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education workshop">
+                <span class="pres-number">31</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI-Powered Productivity for University Staff (ICARC)</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Workshop</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Productivity</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai keynote conference">
+                <span class="pres-number">32</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI Reimagined: Transforming Business and Technology in the Age of Intelligence</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">Business</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">33</span>
+                <div class="pres-content">
+                    <p class="pres-title">Generative AI in Research for Engineering Students</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Engineering</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">34</span>
+                <div class="pres-content">
+                    <p class="pres-title">Engineering with AI for a Sustainable Future</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Engineering</span>
+                        <span class="pres-tag">Sustainability</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai keynote conference">
+                <span class="pres-number">35</span>
+                <div class="pres-content">
+                    <p class="pres-title">Engineering the AI Revolution: Impact on Industry, Education and Society</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">Industry</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">36</span>
+                <div class="pres-content">
+                    <p class="pres-title">Seizing the Future: How Generative AI Can Transform Sri Lanka's Economy</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Policy</span>
+                        <span class="pres-tag">Sri Lanka</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">37</span>
+                <div class="pres-content">
+                    <p class="pres-title">Sri Lanka 5.0: AI for Human Centric Development</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Policy</span>
+                        <span class="pres-tag">Sri Lanka</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai">
+                <span class="pres-number">38</span>
+                <div class="pres-content">
+                    <p class="pres-title">Artificial Intelligence (AI): Current Trends & Future Directions</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Trends</span>
+                        <span class="pres-tag">Future</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">39</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI in Healthcare: Current Trends and Future Directions</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Healthcare</span>
+                        <span class="pres-tag">Research</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai conference">
+                <span class="pres-number">40</span>
+                <div class="pres-content">
+                    <p class="pres-title">Global Digitalization Trends and Its Impacts on Education & Research</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Conference</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education workshop">
+                <span class="pres-number">41</span>
+                <div class="pres-content">
+                    <p class="pres-title">Workshop on Programming and AI as Tools for Active Learning in Higher Education</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Workshop</span>
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">42</span>
+                <div class="pres-content">
+                    <p class="pres-title">GenAI for Research Writing</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Writing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai workshop">
+                <span class="pres-number">43</span>
+                <div class="pres-content">
+                    <p class="pres-title">GenAI for Network Engineers / Prompt Engineering Masterclass for Network Engineers</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Workshop</span>
+                        <span class="pres-tag">Networking</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">44</span>
+                <div class="pres-content">
+                    <p class="pres-title">GenAI in Management</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Management</span>
+                        <span class="pres-tag">Business</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">45</span>
+                <div class="pres-content">
+                    <p class="pres-title">Revolutionizing Commerce Education: Unleashing GenAI for Advanced Level Teaching Excellence</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Commerce</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">46</span>
+                <div class="pres-content">
+                    <p class="pres-title">Revolutionizing Research with Generative AI</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Innovation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">47</span>
+                <div class="pres-content">
+                    <p class="pres-title">Research Planning, Analysis & Conclusion Interpretation with AI</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai workshop">
+                <span class="pres-number">48</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI for Newsroom Leadership: A Workshop for Editors</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Workshop</span>
+                        <span class="pres-tag">Media</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">49</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI & IoT – The Future of Intelligent Systems in Business & Society</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">IoT</span>
+                        <span class="pres-tag">Industry</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai conference keynote">
+                <span class="pres-number">50</span>
+                <div class="pres-content">
+                    <p class="pres-title">From Multidisciplinary AI to National Impact / Building Sri Lanka's Engineering & Digital Future</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">Sri Lanka</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">51</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI on the Rise: Navigating Responsibility, Transparency & Governance in IT</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Ethics</span>
+                        <span class="pres-tag">Governance</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">52</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI-Powered Research: Tools and Techniques for Rapid Progress</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Tools</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">53</span>
+                <div class="pres-content">
+                    <p class="pres-title">Leveraging (Gen)AI for Research and Innovation</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Innovation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">54</span>
+                <div class="pres-content">
+                    <p class="pres-title">Multidisciplinary Research: The Power of Diversity and Sustainability</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Multidisciplinary</span>
+                        <span class="pres-tag">Education</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education conference">
+                <span class="pres-number">55</span>
+                <div class="pres-content">
+                    <p class="pres-title">AI/ML in Multidisciplinary Research and Development</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Research</span>
+                        <span class="pres-tag">Multidisciplinary</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai conference">
+                <span class="pres-number">56</span>
+                <div class="pres-content">
+                    <p class="pres-title">18th Asi@Connect Governors' Meeting – AI Strategy and NREN Leadership</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Conference</span>
+                        <span class="pres-tag">NREN</span>
+                        <span class="pres-tag">Leadership</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">57</span>
+                <div class="pres-content">
+                    <p class="pres-title">Technology Enabled Education</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Technology</span>
+                        <span class="pres-tag">Innovation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education keynote">
+                <span class="pres-number">58</span>
+                <div class="pres-content">
+                    <p class="pres-title">Diamond Jubilee Keynote: Engineering the Future – Vision 2050</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Keynote</span>
+                        <span class="pres-tag">Engineering</span>
+                        <span class="pres-tag">Future</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">59</span>
+                <div class="pres-content">
+                    <p class="pres-title">Designing for Blended Impact: Transforming Your Course for the Future</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">Education</span>
+                        <span class="pres-tag">Blended Learning</span>
+                        <span class="pres-tag">AI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pres-card fade-in" data-tags="ai education">
+                <span class="pres-number">60</span>
+                <div class="pres-content">
+                    <p class="pres-title">Digital Transformation in the Era of AI</p>
+                    <div class="pres-meta">
+                        <span class="pres-tag">AI</span>
+                        <span class="pres-tag">Digital Transformation</span>
+                        <span class="pres-tag">Industry</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="emptyState">
+            <p style="font-size:1.1rem;">No presentations found for that search.</p>
+        </div>
+
     </main>
 
     <!-- Footer -->
@@ -509,51 +1060,48 @@
 
     <script src="script.js"></script>
     <script>
-        // Filter functionality
-        function filterPosts(category) {
-            const cards = document.querySelectorAll('.blog-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter cards
+        // Filter by tag
+        function filterCards(tag, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.pres-card');
+            let visible = 0;
             cards.forEach(card => {
-                if (category === 'all') {
-                    card.style.display = 'flex';
-                } else {
-                    const categories = card.getAttribute('data-category');
-                    if (categories.includes(category)) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                const tags = card.getAttribute('data-tags') || '';
+                const show = tag === 'all' || tags.includes(tag);
+                card.style.display = show ? 'flex' : 'none';
+                if (show) visible++;
+            });
+            document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+            renumberVisible();
+        }
+
+        // Search
+        function searchCards() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.pres-card');
+            let visible = 0;
+            cards.forEach(card => {
+                const title = card.querySelector('.pres-title').textContent.toLowerCase();
+                const show = title.includes(query);
+                card.style.display = show ? 'flex' : 'none';
+                if (show) visible++;
+            });
+            document.getElementById('emptyState').style.display = visible === 0 ? 'block' : 'none';
+            renumberVisible();
+        }
+
+        // Renumber visible cards
+        function renumberVisible() {
+            let n = 1;
+            document.querySelectorAll('.pres-card').forEach(card => {
+                if (card.style.display !== 'none') {
+                    card.querySelector('.pres-number').textContent = String(n).padStart(2, '0');
+                    n++;
                 }
             });
         }
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.blog-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
     </script>
 </body>
 </html>
