@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="styles.css">
     <style>
 
-        /* ═══════════════════════════════════════
+        /* ═══════════════════════════════
            HERO
-        ═══════════════════════════════════════ */
+        ═══════════════════════════════ */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -22,7 +22,7 @@
             overflow: hidden;
         }
 
-        /* ── Slideshow backgrounds ── */
+        /* Slideshow background */
         .hero-slides {
             position: absolute;
             inset: 0;
@@ -34,47 +34,47 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            transition: opacity 1.4s ease-in-out;
         }
         .hero-slide.active { opacity: 1; }
         .hero-slide:nth-child(1) { background-image: url('hero-background.jpg'); }
         .hero-slide:nth-child(2) { background-image: url('hero-background2.jpg'); }
         .hero-slide:nth-child(3) { background-image: url('hero-background3.jpg'); }
 
-        /* ── Dark overlay ── */
+        /* Dark overlay */
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(15, 12, 10, 0.72);
+            background: rgba(15, 12, 10, 0.70);
             z-index: 1;
         }
 
-        /* ── Content sits above everything ── */
+        /* Content */
         .hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
             padding: 2rem;
-            max-width: 900px;
+            max-width: 860px;
             width: 100%;
         }
 
-        /* ── Code comment label ── */
+        /* Code comment prefix  // Hello, World! style */
         .hero-comment {
             font-family: 'Courier New', monospace;
-            color: rgba(212, 175, 55, 0.6);
+            color: rgba(212, 175, 55, 0.55);
             font-size: 0.82rem;
             letter-spacing: 0.18em;
             margin-bottom: 1.6rem;
             opacity: 0;
-            transform: translateY(-10px);
             animation: fadeSlideDown 0.7s ease forwards 0.3s;
         }
         @keyframes fadeSlideDown {
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(-10px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── Name ── */
+        /* Name */
         .hero-name {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 5vw, 3.8rem);
@@ -83,88 +83,88 @@
             letter-spacing: 0.14em;
             margin: 0 0 0.2rem;
             opacity: 0;
-            transform: translateY(28px);
             animation: fadeUp 0.9s ease forwards 0.9s;
         }
         @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── Gold divider ── */
+        /* Gold divider */
         .hero-divider {
             width: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, #d4af37, transparent);
-            margin: 1rem auto 1.4rem;
-            animation: growLine 0.8s ease forwards 1.6s;
+            margin: 1rem auto 1.5rem;
+            animation: growDivider 0.8s ease forwards 1.6s;
         }
-        @keyframes growLine {
+        @keyframes growDivider {
             to { width: 200px; }
         }
 
-        /* ── Subtitle row ── */
+        /* Subtitle row */
         .hero-subtitle {
             font-family: 'Work Sans', sans-serif;
             font-size: clamp(0.85rem, 2vw, 1.15rem);
             font-weight: 300;
             letter-spacing: 0.32em;
-            color: rgba(255, 255, 255, 0.88);
+            color: rgba(255, 255, 255, 0.85);
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 2.2em;
+            min-height: 2em;
             margin-bottom: 2rem;
         }
 
-        /* typed text — JS writes here */
+        /* The typed text span */
         #typedText {
             white-space: nowrap;
         }
 
-        /* ── THE CURSOR ──
-           This is a standalone element.
-           It has ONE job: blink forever.
-           Nothing else touches it.
-        ── */
-        #cursor {
+        /* Blinking cursor — pure CSS, runs forever independently */
+        .cursor {
             display: inline-block;
             width: 2px;
-            height: 1em;
+            height: 1.1em;
             background-color: #d4af37;
-            margin-left: 4px;
+            margin-left: 5px;
             vertical-align: middle;
-            /* blink loop — infinite, no fill, no forwards — just loops */
+            border-radius: 1px;
+            /* infinite blink — no forwards, no fill-mode, just loops forever */
             animation: blink 0.75s step-end infinite;
         }
         @keyframes blink {
-            0%,
-            100% { opacity: 1; }
-            50%   { opacity: 0; }
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0; }
         }
 
-        /* ── Email link ── */
+        /* Email link */
         .hero-email {
             opacity: 0;
-            transition: opacity 0.9s ease;
+            animation: fadeIn 0.9s ease forwards 0s; /* delay set by JS */
         }
-        .hero-email.visible { opacity: 1; }
+        .hero-email.visible {
+            animation: fadeIn 0.9s ease forwards 0s;
+        }
         .hero-email a {
+            color: #d4af37;
+            text-decoration: none;
             font-family: 'Work Sans', sans-serif;
             font-weight: 400;
             font-size: 0.95rem;
-            letter-spacing: 0.06em;
-            color: #d4af37;
-            text-decoration: none;
+            letter-spacing: 0.08em;
+            transition: opacity 0.25s;
             border-bottom: 1px solid rgba(212, 175, 55, 0.35);
-            padding-bottom: 1px;
-            transition: border-color 0.2s, opacity 0.2s;
+            padding-bottom: 2px;
         }
-        .hero-email a:hover {
-            border-color: #d4af37;
-            opacity: 0.8;
+        .hero-email a:hover { opacity: 0.7; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── Scroll indicator ── */
+        /* Scroll indicator */
         .hero-scroll {
             position: absolute;
             bottom: 2.5rem;
@@ -176,27 +176,59 @@
             align-items: center;
             gap: 6px;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            animation: fadeIn 1s ease forwards 4.5s;
         }
-        .hero-scroll.visible { opacity: 1; }
         .hero-scroll span {
             font-family: 'Work Sans', sans-serif;
             font-size: 0.65rem;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             color: rgba(255,255,255,0.4);
             text-transform: uppercase;
         }
-        .scroll-arrow {
-            width: 20px;
-            height: 20px;
-            border-right: 2px solid rgba(212, 175, 55, 0.6);
-            border-bottom: 2px solid rgba(212, 175, 55, 0.6);
-            transform: rotate(45deg);
-            animation: scrollBounce 1.4s ease-in-out infinite;
+        .scroll-mouse {
+            width: 22px;
+            height: 34px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 11px;
+            display: flex;
+            justify-content: center;
+            padding-top: 5px;
         }
-        @keyframes scrollBounce {
-            0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.6; }
-            50%       { transform: rotate(45deg) translateY(5px); opacity: 1; }
+        .scroll-wheel {
+            width: 3px;
+            height: 7px;
+            background: #d4af37;
+            border-radius: 2px;
+            animation: scrollWheel 1.6s ease-in-out infinite;
+        }
+        @keyframes scrollWheel {
+            0%   { transform: translateY(0); opacity: 1; }
+            80%  { transform: translateY(10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 0; }
+        }
+
+        /* Slide dots */
+        .hero-dots {
+            position: absolute;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            z-index: 2;
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 4.5s;
+        }
+        .hero-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .hero-dot.active {
+            background: #d4af37;
+            transform: scale(1.3);
         }
 
     </style>
@@ -207,7 +239,7 @@
     <nav>
         <div class="nav-content">
             <a href="index.html" class="logo">Roshan G. Ragel</a>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">&#9776;</button>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="about.html">About</a></li>
                 <li><a href="publications.html">Publications</a></li>
@@ -224,8 +256,8 @@
     <!-- Hero -->
     <section class="hero">
 
-        <!-- Slideshow layers -->
-        <div class="hero-slides">
+        <!-- Background slideshow -->
+        <div class="hero-slides" id="heroSlides">
             <div class="hero-slide active"></div>
             <div class="hero-slide"></div>
             <div class="hero-slide"></div>
@@ -234,29 +266,44 @@
         <!-- Overlay -->
         <div class="hero-overlay"></div>
 
-        <!-- Content -->
+        <!-- Main content -->
         <div class="hero-content">
+
+            <!-- Code comment label -->
             <p class="hero-comment">// Professor · University of Peradeniya</p>
 
+            <!-- Name -->
             <h1 class="hero-name">ROSHAN G. RAGEL</h1>
 
+            <!-- Animated gold line -->
             <div class="hero-divider"></div>
 
-            <!-- Subtitle: typed text + eternal blinking cursor -->
+            <!-- Typewriter subtitle + eternal blinking cursor -->
             <div class="hero-subtitle">
-                <span id="typedText"></span><span id="cursor"></span>
+                <span id="typedText"></span>
+                <span class="cursor"></span>
             </div>
 
             <!-- Email -->
             <div class="hero-email" id="heroEmail">
                 <a href="mailto:roshanr@eng.pdn.ac.lk">roshanr@eng.pdn.ac.lk</a>
             </div>
+
         </div>
 
         <!-- Scroll indicator -->
-        <div class="hero-scroll" id="heroScroll">
-            <span>scroll</span>
-            <div class="scroll-arrow"></div>
+        <div class="hero-scroll">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll</span>
+        </div>
+
+        <!-- Slide dots -->
+        <div class="hero-dots" id="heroDots">
+            <div class="hero-dot active" onclick="goToSlide(0)"></div>
+            <div class="hero-dot" onclick="goToSlide(1)"></div>
+            <div class="hero-dot" onclick="goToSlide(2)"></div>
         </div>
 
     </section>
@@ -269,50 +316,73 @@
     <script src="script.js"></script>
 
     <script>
+    /* ═══════════════════════════════════════════
+       1.  TYPEWRITER  — cursor blinks forever
+    ═══════════════════════════════════════════ */
     (function () {
+        const PHRASES = [
+            "EDUCATOR · RESEARCHER · LEADER"
+        ];
 
-        /* ── Typewriter ─────────────────────────────────────────── */
-        var subtitle  = "EDUCATOR \u00B7 RESEARCHER \u00B7 LEADER";
-        var textEl    = document.getElementById('typedText');
-        var emailEl   = document.getElementById('heroEmail');
-        var scrollEl  = document.getElementById('heroScroll');
+        const textEl  = document.getElementById('typedText');
+        const emailEl = document.getElementById('heroEmail');
 
-        var START_AFTER  = 1900;   // ms — wait for name + divider animations
-        var CHAR_SPEED   = 60;     // ms per character
-        var AFTER_TYPED  = 600;    // ms after last char → show email & scroll
+        const START_DELAY  = 1800;   // wait for name animation
+        const CHAR_SPEED   = 60;     // ms per character
+        const EMAIL_DELAY  = 600;    // ms after typing finishes
 
-        setTimeout(function () {
-            var i = 0;
-            function typeChar() {
-                if (i < subtitle.length) {
-                    textEl.textContent += subtitle[i];
+        function type(str, cb) {
+            let i = 0;
+            function next() {
+                if (i <= str.length) {
+                    textEl.textContent = str.slice(0, i);
                     i++;
-                    setTimeout(typeChar, CHAR_SPEED);
-                } else {
-                    // typing done — reveal email & scroll hint
-                    setTimeout(function () {
-                        emailEl.classList.add('visible');
-                        scrollEl.classList.add('visible');
-                    }, AFTER_TYPED);
+                    setTimeout(next, CHAR_SPEED);
+                } else if (cb) {
+                    cb();
                 }
             }
-            typeChar();
-        }, START_AFTER);
-
-        /* ── Background slideshow ───────────────────────────────── */
-        var slides   = document.querySelectorAll('.hero-slide');
-        var current  = 0;
-        var total    = slides.length;
-
-        // Only run slideshow if there are multiple slides
-        if (total > 1) {
-            setInterval(function () {
-                slides[current].classList.remove('active');
-                current = (current + 1) % total;
-                slides[current].classList.add('active');
-            }, 5000);
+            next();
         }
 
+        setTimeout(function () {
+            type(PHRASES[0], function () {
+                // typing done — show email
+                setTimeout(function () {
+                    emailEl.style.animation = 'fadeIn 0.9s ease forwards';
+                    emailEl.style.opacity   = '1';
+                }, EMAIL_DELAY);
+            });
+        }, START_DELAY);
+        // NOTE: The .cursor element has its own independent CSS animation
+        // (animation: blink 0.75s step-end infinite) — it never stops
+        // because it has NO forwards fill-mode and NO conflict with JS.
+    })();
+
+
+    /* ═══════════════════════════════════════════
+       2.  BACKGROUND SLIDESHOW
+    ═══════════════════════════════════════════ */
+    (function () {
+        const slides    = document.querySelectorAll('.hero-slide');
+        const dots      = document.querySelectorAll('.hero-dot');
+        let   current   = 0;
+        const INTERVAL  = 5000;   // 5 s per slide
+
+        function goToSlide(n) {
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (n + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+        }
+
+        // expose for onclick
+        window.goToSlide = goToSlide;
+
+        setInterval(function () {
+            goToSlide(current + 1);
+        }, INTERVAL);
     })();
     </script>
 
