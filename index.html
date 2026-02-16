@@ -19,11 +19,6 @@
             overflow: hidden;
         }
 
-        /* ── Slideshow stack ──────────────────────────────────────
-           .active  → opacity 1, z 2  (fading IN on top)
-           .leaving → opacity 1, z 1  (stays visible underneath)
-           A real image is ALWAYS fully opaque — never black.
-        ─────────────────────────────────────────────────────────── */
         .hero-slides { position: absolute; inset: 0; z-index: 0; }
 
         .hero-slide {
@@ -34,15 +29,19 @@
             opacity: 0;
             z-index: 0;
             transition: opacity 1.4s ease-in-out;
-            display: none; /* revealed only after image confirmed */
         }
         .hero-slide.leaving { opacity: 1; z-index: 1; }
         .hero-slide.active  { opacity: 1; z-index: 2; }
 
+        /* Fallback colour shown before any image loads */
+        .hero-slides {
+            background: #1a1410;
+        }
+
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(15,12,10,0.68);
+            background: rgba(15,12,10,0.62);
             z-index: 3;
         }
 
@@ -107,7 +106,6 @@
         }
         #typedText { white-space: nowrap; }
 
-        /* Cursor — pure CSS only, JS never touches this element */
         .cursor {
             display: inline-block;
             width: 2px;
@@ -145,8 +143,7 @@
 
         .hero-scroll {
             position: absolute;
-            bottom: 2.5rem;
-            left: 50%;
+            bottom: 2.5rem; left: 50%;
             transform: translateX(-50%);
             z-index: 5;
             display: flex;
@@ -167,14 +164,12 @@
             width: 22px; height: 34px;
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 11px;
-            display: flex;
-            justify-content: center;
+            display: flex; justify-content: center;
             padding-top: 5px;
         }
         .scroll-wheel {
             width: 3px; height: 7px;
-            background: #d4af37;
-            border-radius: 2px;
+            background: #d4af37; border-radius: 2px;
             animation: scrollWheel 1.6s ease-in-out infinite;
         }
         @keyframes scrollWheel {
@@ -186,9 +181,7 @@
         .hero-dots {
             position: absolute;
             bottom: 2.5rem; right: 2.5rem;
-            z-index: 5;
-            display: flex;
-            gap: 8px;
+            z-index: 5; display: flex; gap: 8px;
             opacity: 0;
             animation: fadeIn 1s ease forwards 4.5s;
         }
@@ -198,7 +191,6 @@
             background: rgba(255,255,255,0.3);
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
-            display: none; /* shown per-image by JS */
         }
         .hero-dot.active { background: #d4af37; transform: scale(1.3); }
 
@@ -225,7 +217,7 @@
 
     <section class="hero">
 
-        <div class="hero-slides">
+        <div class="hero-slides" id="heroSlides">
             <div class="hero-slide" id="slide0"></div>
             <div class="hero-slide" id="slide1"></div>
             <div class="hero-slide" id="slide2"></div>
@@ -252,9 +244,9 @@
         </div>
 
         <div class="hero-dots" id="heroDots">
-            <div class="hero-dot" id="dot0"></div>
-            <div class="hero-dot" id="dot1"></div>
-            <div class="hero-dot" id="dot2"></div>
+            <div class="hero-dot" id="dot0" onclick="goToSlide(0)"></div>
+            <div class="hero-dot" id="dot1" onclick="goToSlide(1)"></div>
+            <div class="hero-dot" id="dot2" onclick="goToSlide(2)"></div>
         </div>
 
     </section>
@@ -315,128 +307,114 @@
     /* ═══════════════════════════════════════════════════════════
        2. SLIDESHOW
        ───────────────────────────────────────────────────────────
-       Priority per slot:
-         1. Your own local file  (hero-background.jpg etc.)
-         2. Unsplash fallback    (always available online)
+       HOW IMAGES WORK:
+       ─────────────────
+       Put your own photos in the same folder as index.html and
+       name them:
+           hero-background.jpg
+           hero-background2.jpg
+           hero-background3.jpg
 
-       This means an image is ALWAYS shown — even if you haven't
-       added your own photos yet. Replace the fallback URLs or
-       the local filenames to suit your project.
+       If a local file is missing, the slot automatically loads a
+       fallback from picsum.photos (works on GitHub Pages, no CORS
+       issues). So images ALWAYS show — even before you upload yours.
 
-       Cross-fade: outgoing slide stays at opacity 1 (.leaving,
-       z-index 1) while the incoming fades in on top (.active,
-       z-index 2). No black flash ever.
+       To change fallbacks, edit the `fallback` URLs below.
     ═══════════════════════════════════════════════════════════ */
     (function () {
 
-        /* ── Configure your images here ── */
+        /* ── Image configuration ── */
         const SOURCES = [
             {
                 local:    'hero-background.jpg',
-                fallback: 'https://images.unsplash.com/photo-1562774053-701939374585?w=1600&q=80',
+                fallback: 'https://picsum.photos/id/1060/1600/900',   /* mountain landscape */
                 slide:    document.getElementById('slide0'),
                 dot:      document.getElementById('dot0')
             },
             {
                 local:    'hero-background2.jpg',
-                fallback: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80',
+                fallback: 'https://picsum.photos/id/1001/1600/900',   /* portrait / campus feel */
                 slide:    document.getElementById('slide1'),
                 dot:      document.getElementById('dot1')
             },
             {
                 local:    'hero-background3.jpg',
-                fallback: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&q=80',
+                fallback: 'https://picsum.photos/id/1074/1600/900',   /* library / academic */
                 slide:    document.getElementById('slide2'),
                 dot:      document.getElementById('dot2')
             }
         ];
 
-        const INTERVAL      = 5000;   // ms between slides
-        const TRANSITION_MS = 1400;   // must match CSS transition duration
+        const INTERVAL      = 5000;
+        const TRANSITION_MS = 1400;
 
         let pending = SOURCES.length;
-        const good  = [];             // entries with a confirmed image
+        const good  = [];
 
-        /* Try local first, fall back to Unsplash if missing */
+        /* For each slot: try local → fallback → skip */
         SOURCES.forEach(function (entry) {
 
             function tryLoad(src, onFail) {
                 const img = new Image();
-                img.onload  = function () { apply(entry, src); };
-                img.onerror = onFail;
-                img.src     = src;
+                img.onload  = function () { register(entry, src); };
+                img.onerror = onFail || function () { tick(); };
+                img.src = src;
             }
 
             tryLoad(
                 entry.local,
-                function () {
-                    /* local failed → try fallback */
-                    tryLoad(
-                        entry.fallback,
-                        function () {
-                            /* both failed (offline?) — skip this slot */
-                            pending--;
-                            if (pending === 0) start();
-                        }
-                    );
-                }
+                function () { tryLoad(entry.fallback); }
             );
         });
 
-        function apply(entry, src) {
+        function register(entry, src) {
             entry.slide.style.backgroundImage = 'url("' + src + '")';
-            entry.slide.style.display = '';   /* make slide visible */
-            entry.dot.style.display   = '';   /* show its dot */
+            entry.slide.style.opacity = '0';   /* will be set by .active */
             good.push(entry);
+            tick();
+        }
+
+        function tick() {
             pending--;
             if (pending === 0) start();
         }
 
-        /* ── Start slideshow once all preloads have settled ── */
         function start() {
+            if (good.length === 0) return; /* nothing loaded — nothing to do */
 
-            if (good.length === 0) {
-                /* Nothing loaded (fully offline, no local files) */
-                document.getElementById('heroDots').style.display = 'none';
-                return;
-            }
-
-            /* Show first image immediately — no fade wait */
+            /* Show slide 0 immediately */
             let current = 0;
             good[0].slide.classList.add('active');
             good[0].dot.classList.add('active');
 
-            /* Only 1 image — keep it on screen forever, no timer */
-            if (good.length === 1) return;
+            if (good.length === 1) return; /* single image — keep forever */
 
-            /* ── Cross-fade to index n within good[] ── */
             function goTo(n) {
                 const prev = current;
                 current = ((n % good.length) + good.length) % good.length;
                 if (prev === current) return;
 
-                /* Outgoing: stays fully visible underneath during cross-fade */
+                /* Outgoing: stay visible underneath */
                 good[prev].slide.classList.remove('active');
                 good[prev].slide.classList.add('leaving');
                 good[prev].dot.classList.remove('active');
 
-                /* Incoming: fades in on top */
+                /* Incoming: fade in on top */
                 good[current].slide.classList.add('active');
                 good[current].dot.classList.add('active');
 
-                /* Drop leaving slide after transition */
+                /* Clean up after transition */
                 setTimeout(function () {
                     good[prev].slide.classList.remove('leaving');
                 }, TRANSITION_MS);
             }
 
-            /* Expose for dot onclick="goToSlide(0/1/2)" */
+            /* Dot clicks — map source index to good[] position */
             window.goToSlide = function (sourceIndex) {
                 const pos = good.findIndex(g => g === SOURCES[sourceIndex]);
                 if (pos !== -1) goTo(pos);
             };
 
-            /* Auto-advance */
             setInterval(function () { goTo(current + 1); }, INTERVAL);
         }
 
