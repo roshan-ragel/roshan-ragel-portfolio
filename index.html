@@ -28,6 +28,14 @@
             inset: 0;
             z-index: 0;
         }
+
+        /*
+         * All slides sit stacked. Every slide stays at opacity:0 by default.
+         * The OUTGOING slide gets .leaving — it fades out SLOWLY.
+         * The INCOMING slide gets .active  — it fades in  SLOWLY on top.
+         * Because .active fades in while .leaving is still visible,
+         * there is NEVER a black gap — a photo is always showing.
+         */
         .hero-slide {
             position: absolute;
             inset: 0;
@@ -35,8 +43,25 @@
             background-position: center;
             opacity: 0;
             transition: opacity 1.4s ease-in-out;
+            /* Stack order: inactive slides sit at z-index 0 */
+            z-index: 0;
         }
-        .hero-slide.active { opacity: 1; }
+
+        /* Outgoing slide: stays on screen during cross-fade, then fully hides */
+        .hero-slide.leaving {
+            opacity: 1;
+            z-index: 1;
+            /* After the transition it will end at opacity:0 — set via JS */
+            transition: opacity 1.4s ease-in-out;
+        }
+
+        /* Incoming slide: fades in above the outgoing one */
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+            transition: opacity 1.4s ease-in-out;
+        }
+
         .hero-slide:nth-child(1) { background-image: url('hero-background.jpg'); }
         .hero-slide:nth-child(2) { background-image: url('hero-background2.jpg'); }
         .hero-slide:nth-child(3) { background-image: url('hero-background3.jpg'); }
@@ -262,7 +287,7 @@
 
         <!-- Background slideshow -->
         <div class="hero-slides" id="heroSlides">
-            <div class="hero-slide active"></div>
+            <div class="hero-slide"></div>
             <div class="hero-slide"></div>
             <div class="hero-slide"></div>
         </div>
@@ -412,27 +437,56 @@
 
 
     /* ═══════════════════════════════════════════════════════════════
-       2.  BACKGROUND SLIDESHOW
+       2.  BACKGROUND SLIDESHOW  — true cross-fade, photo always visible
+       ─────────────────────────────────────────────────────────────
+       Strategy:
+         • Outgoing slide → class "leaving"  (stays opaque, z-index 1)
+         • Incoming slide → class "active"   (fades in above,  z-index 2)
+         • After the CSS transition completes (1.4 s), strip "leaving"
+           from the old slide (drops it to opacity 0 in the background).
+         • Result: at least one photo is always fully visible.
     ═══════════════════════════════════════════════════════════════ */
     (function () {
-        const slides   = document.querySelectorAll('.hero-slide');
-        const dots     = document.querySelectorAll('.hero-dot');
-        let   current  = 0;
-        const INTERVAL = 5000;
+        const slides        = document.querySelectorAll('.hero-slide');
+        const dots          = document.querySelectorAll('.hero-dot');
+        let   current       = 0;
+        const INTERVAL      = 5000;   // ms between slides
+        const TRANSITION_MS = 1400;   // must match CSS transition duration
+
+        /* Make slide 0 instantly visible on load — no fade-in wait */
+        slides[0].classList.add('active');
 
         function goToSlide(n) {
-            slides[current].classList.remove('active');
-            dots[current].classList.remove('active');
-            current = (n + slides.length) % slides.length;
-            slides[current].classList.add('active');
+            const prev = current;
+            current = ((n % slides.length) + slides.length) % slides.length;
+
+            if (prev === current) return;
+
+            /* 1. Mark the outgoing slide as "leaving" — keeps it visible */
+            slides[prev].classList.remove('active');
+            slides[prev].classList.add('leaving');
+
+            /* 2. Update dots */
+            dots[prev].classList.remove('active');
             dots[current].classList.add('active');
+
+            /* 3. Bring in the new slide on top */
+            slides[current].classList.add('active');
+
+            /* 4. Once the cross-fade finishes, clean up the leaving slide */
+            setTimeout(function () {
+                slides[prev].classList.remove('leaving');
+            }, TRANSITION_MS);
         }
 
+        /* Expose for the dot onclick handlers */
         window.goToSlide = goToSlide;
 
+        /* Auto-advance */
         setInterval(function () {
             goToSlide(current + 1);
         }, INTERVAL);
+
     })();
     </script>
 
