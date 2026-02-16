@@ -22,62 +22,49 @@
             overflow: hidden;
         }
 
-        /* Slideshow background */
+        /* ─── Slideshow ─────────────────────────────────────────
+           All slides stacked absolutely.
+           .active  → opacity 1, z-index 2  (fading IN on top)
+           .leaving → opacity 1, z-index 1  (stays visible underneath)
+           After TRANSITION_MS the JS removes .leaving.
+           A photo is ALWAYS fully opaque — no black gap ever.
+        ────────────────────────────────────────────────────────── */
         .hero-slides {
             position: absolute;
             inset: 0;
             z-index: 0;
         }
-
-        /*
-         * All slides sit stacked. Every slide stays at opacity:0 by default.
-         * The OUTGOING slide gets .leaving — it fades out SLOWLY.
-         * The INCOMING slide gets .active  — it fades in  SLOWLY on top.
-         * Because .active fades in while .leaving is still visible,
-         * there is NEVER a black gap — a photo is always showing.
-         */
         .hero-slide {
             position: absolute;
             inset: 0;
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 1.4s ease-in-out;
-            /* Stack order: inactive slides sit at z-index 0 */
             z-index: 0;
+            transition: opacity 1.4s ease-in-out;
+            display: none; /* hidden until image confirmed loaded */
         }
-
-        /* Outgoing slide: stays on screen during cross-fade, then fully hides */
         .hero-slide.leaving {
             opacity: 1;
             z-index: 1;
-            /* After the transition it will end at opacity:0 — set via JS */
-            transition: opacity 1.4s ease-in-out;
         }
-
-        /* Incoming slide: fades in above the outgoing one */
         .hero-slide.active {
             opacity: 1;
             z-index: 2;
-            transition: opacity 1.4s ease-in-out;
         }
-
-        .hero-slide:nth-child(1) { background-image: url('hero-background.jpg'); }
-        .hero-slide:nth-child(2) { background-image: url('hero-background2.jpg'); }
-        .hero-slide:nth-child(3) { background-image: url('hero-background3.jpg'); }
 
         /* Dark overlay */
         .hero-overlay {
             position: absolute;
             inset: 0;
             background: rgba(15, 12, 10, 0.70);
-            z-index: 1;
+            z-index: 3;
         }
 
-        /* Content */
+        /* Content sits above overlay */
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 4;
             text-align: center;
             padding: 2rem;
             max-width: 860px;
@@ -127,7 +114,7 @@
             to { width: 200px; }
         }
 
-        /* Subtitle row — fixed height so layout doesn't shift between phrases */
+        /* Subtitle row */
         .hero-subtitle {
             font-family: 'Work Sans', sans-serif;
             font-size: clamp(0.85rem, 2vw, 1.15rem);
@@ -140,17 +127,9 @@
             min-height: 2em;
             margin-bottom: 2rem;
         }
+        #typedText { white-space: nowrap; }
 
-        /* The typed text span */
-        #typedText {
-            white-space: nowrap;
-        }
-
-        /* ─────────────────────────────────────────────────────
-           CURSOR  — lives entirely in CSS, blinks forever.
-           It is NEVER touched by JS. No classList changes,
-           no style mutations, nothing — so it can never stall.
-        ───────────────────────────────────────────────────── */
+        /* Cursor — pure CSS, JS never touches it */
         .cursor {
             display: inline-block;
             width: 2px;
@@ -159,8 +138,6 @@
             margin-left: 4px;
             vertical-align: middle;
             border-radius: 1px;
-
-            /* Pure CSS infinite blink — no fill-mode, no forwards */
             animation: blink 0.75s step-end infinite;
         }
         @keyframes blink {
@@ -168,13 +145,9 @@
             50%       { opacity: 0; }
         }
 
-        /* Email link */
-        .hero-email {
-            opacity: 0;
-        }
-        .hero-email.visible {
-            animation: fadeIn 0.9s ease forwards;
-        }
+        /* Email */
+        .hero-email { opacity: 0; }
+        .hero-email.visible { animation: fadeIn 0.9s ease forwards; }
         .hero-email a {
             color: #d4af37;
             text-decoration: none;
@@ -199,7 +172,7 @@
             bottom: 2.5rem;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 2;
+            z-index: 5;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -236,12 +209,12 @@
             100% { transform: translateY(0); opacity: 0; }
         }
 
-        /* Slide dots */
+        /* Dots */
         .hero-dots {
             position: absolute;
             bottom: 2.5rem;
             right: 2.5rem;
-            z-index: 2;
+            z-index: 5;
             display: flex;
             gap: 8px;
             opacity: 0;
@@ -254,6 +227,7 @@
             background: rgba(255,255,255,0.3);
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
+            display: none; /* shown only if image loaded */
         }
         .hero-dot.active {
             background: #d4af37;
@@ -285,55 +259,41 @@
     <!-- Hero -->
     <section class="hero">
 
-        <!-- Background slideshow -->
-        <div class="hero-slides" id="heroSlides">
-            <div class="hero-slide"></div>
-            <div class="hero-slide"></div>
-            <div class="hero-slide"></div>
+        <!-- Slides — 3 divs, images & visibility set by JS after preload -->
+        <div class="hero-slides">
+            <div class="hero-slide" id="slide0"></div>
+            <div class="hero-slide" id="slide1"></div>
+            <div class="hero-slide" id="slide2"></div>
         </div>
 
         <!-- Overlay -->
         <div class="hero-overlay"></div>
 
-        <!-- Main content -->
+        <!-- Content -->
         <div class="hero-content">
-
-            <!-- Code comment label -->
             <p class="hero-comment">// Professor · University of Peradeniya</p>
-
-            <!-- Name -->
             <h1 class="hero-name">ROSHAN G. RAGEL</h1>
-
-            <!-- Animated gold line -->
             <div class="hero-divider"></div>
-
-            <!-- Typewriter subtitle + eternal blinking cursor -->
             <div class="hero-subtitle">
                 <span id="typedText"></span>
-                <!-- The cursor element is NEVER touched by JS — pure CSS blink forever -->
                 <span class="cursor"></span>
             </div>
-
-            <!-- Email -->
             <div class="hero-email" id="heroEmail">
                 <a href="mailto:roshanr@eng.pdn.ac.lk">roshanr@eng.pdn.ac.lk</a>
             </div>
-
         </div>
 
         <!-- Scroll indicator -->
         <div class="hero-scroll">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
-            </div>
+            <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
             <span>Scroll</span>
         </div>
 
-        <!-- Slide dots -->
+        <!-- Dots — each revealed only if its image loaded -->
         <div class="hero-dots" id="heroDots">
-            <div class="hero-dot active" onclick="goToSlide(0)"></div>
-            <div class="hero-dot" onclick="goToSlide(1)"></div>
-            <div class="hero-dot" onclick="goToSlide(2)"></div>
+            <div class="hero-dot" id="dot0"></div>
+            <div class="hero-dot" id="dot1"></div>
+            <div class="hero-dot" id="dot2"></div>
         </div>
 
     </section>
@@ -346,18 +306,10 @@
     <script src="script.js"></script>
 
     <script>
-    /* ═══════════════════════════════════════════════════════════════
-       1.  TYPEWRITER ENGINE
-       ─────────────────────────────────────────────────────────────
-       Rules:
-         • Cursor is NEVER touched here — it blinks via pure CSS.
-         • Each phrase is typed out, held, then erased character-by-
-           character before the next phrase begins.
-         • After the first phrase completes, the email is revealed once.
-         • The loop runs forever.
-    ═══════════════════════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════════════════
+       1. TYPEWRITER  — cursor blinks forever via pure CSS only
+    ═══════════════════════════════════════════════════════════ */
     (function () {
-
         const PHRASES = [
             "EDUCATOR · RESEARCHER · LEADER",
             "PROFESSOR OF COMPUTER ENGINEERING",
@@ -368,19 +320,14 @@
         const textEl  = document.getElementById('typedText');
         const emailEl = document.getElementById('heroEmail');
 
-        const START_DELAY   = 1800;  // ms — wait for name animation to finish
-        const TYPE_SPEED    = 65;    // ms per character typed
-        const ERASE_SPEED   = 35;    // ms per character erased (faster feels natural)
-        const HOLD_AFTER    = 2000;  // ms — pause after full phrase is shown
-        const PAUSE_BETWEEN = 500;   // ms — gap between erase end and next type start
-
+        const START_DELAY   = 1800;
+        const TYPE_SPEED    = 65;
+        const ERASE_SPEED   = 35;
+        const HOLD_AFTER    = 2000;
+        const PAUSE_BETWEEN = 500;
         let emailShown = false;
 
-        /* ── helpers ── */
-
-        function delay(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
+        const delay = ms => new Promise(r => setTimeout(r, ms));
 
         async function typePhrase(str) {
             for (let i = 1; i <= str.length; i++) {
@@ -390,102 +337,133 @@
         }
 
         async function erasePhrase() {
-            const current = textEl.textContent;
-            for (let i = current.length - 1; i >= 0; i--) {
-                textEl.textContent = current.slice(0, i);
+            const s = textEl.textContent;
+            for (let i = s.length - 1; i >= 0; i--) {
+                textEl.textContent = s.slice(0, i);
                 await delay(ERASE_SPEED);
             }
         }
 
-        /* ── main loop ── */
-
         async function run() {
             await delay(START_DELAY);
-
-            let index = 0;
-
+            let idx = 0;
             while (true) {
-                const phrase = PHRASES[index];
-
-                // Type it out
-                await typePhrase(phrase);
-
-                // Reveal email once, after the very first phrase is complete
+                await typePhrase(PHRASES[idx]);
                 if (!emailShown) {
                     emailShown = true;
                     emailEl.classList.add('visible');
                 }
-
-                // Hold so the reader can absorb it
                 await delay(HOLD_AFTER);
-
-                // Erase — but leave the last phrase visible on final iteration?
-                // No — we loop forever, so always erase.
                 await erasePhrase();
-
-                // Brief pause before next phrase
                 await delay(PAUSE_BETWEEN);
-
-                // Advance to next phrase, wrap around
-                index = (index + 1) % PHRASES.length;
+                idx = (idx + 1) % PHRASES.length;
             }
         }
 
         run();
-
     })();
 
 
-    /* ═══════════════════════════════════════════════════════════════
-       2.  BACKGROUND SLIDESHOW  — true cross-fade, photo always visible
-       ─────────────────────────────────────────────────────────────
-       Strategy:
-         • Outgoing slide → class "leaving"  (stays opaque, z-index 1)
-         • Incoming slide → class "active"   (fades in above,  z-index 2)
-         • After the CSS transition completes (1.4 s), strip "leaving"
-           from the old slide (drops it to opacity 0 in the background).
-         • Result: at least one photo is always fully visible.
-    ═══════════════════════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════════════════
+       2. SLIDESHOW — only shows slides whose images actually loaded
+       ───────────────────────────────────────────────────────────
+       Each image is preloaded with new Image() before any DOM
+       change. Only slides whose image resolves successfully are
+       shown. Missing images are silently skipped — their slide
+       and dot stay hidden (display:none).
+
+       Cross-fade logic (no black flash):
+         • Outgoing gets .leaving → stays opacity:1 at z-index 1
+         • Incoming gets .active  → fades to opacity:1 at z-index 2
+         • After CSS transition completes, .leaving is removed
+         • A photo is ALWAYS fully visible at every moment
+    ═══════════════════════════════════════════════════════════ */
     (function () {
-        const slides        = document.querySelectorAll('.hero-slide');
-        const dots          = document.querySelectorAll('.hero-dot');
-        let   current       = 0;
-        const INTERVAL      = 5000;   // ms between slides
-        const TRANSITION_MS = 1400;   // must match CSS transition duration
 
-        /* Make slide 0 instantly visible on load — no fade-in wait */
-        slides[0].classList.add('active');
+        const SOURCES = [
+            { src: 'hero-background.jpg',  slide: document.getElementById('slide0'), dot: document.getElementById('dot0') },
+            { src: 'hero-background2.jpg', slide: document.getElementById('slide1'), dot: document.getElementById('dot1') },
+            { src: 'hero-background3.jpg', slide: document.getElementById('slide2'), dot: document.getElementById('dot2') }
+        ];
 
-        function goToSlide(n) {
-            const prev = current;
-            current = ((n % slides.length) + slides.length) % slides.length;
+        const INTERVAL      = 5000;
+        const TRANSITION_MS = 1400;
 
-            if (prev === current) return;
+        let pending = SOURCES.length;
+        const good  = []; // only entries whose image loaded OK
 
-            /* 1. Mark the outgoing slide as "leaving" — keeps it visible */
-            slides[prev].classList.remove('active');
-            slides[prev].classList.add('leaving');
+        SOURCES.forEach(function (entry) {
+            const img = new Image();
 
-            /* 2. Update dots */
-            dots[prev].classList.remove('active');
-            dots[current].classList.add('active');
+            img.onload = function () {
+                /* Apply background only after confirming the file exists */
+                entry.slide.style.backgroundImage = 'url("' + entry.src + '")';
+                entry.slide.style.display = '';  /* make visible */
+                entry.dot.style.display   = '';
+                good.push(entry);
+                done();
+            };
 
-            /* 3. Bring in the new slide on top */
-            slides[current].classList.add('active');
+            img.onerror = function () {
+                /* Image missing or broken — slide & dot stay display:none */
+                done();
+            };
 
-            /* 4. Once the cross-fade finishes, clean up the leaving slide */
-            setTimeout(function () {
-                slides[prev].classList.remove('leaving');
-            }, TRANSITION_MS);
+            img.src = entry.src;
+        });
+
+        function done() {
+            pending--;
+            if (pending === 0) start();
         }
 
-        /* Expose for the dot onclick handlers */
-        window.goToSlide = goToSlide;
+        function start() {
+            /* Nothing loaded — hide dots, nothing to show */
+            if (good.length === 0) {
+                document.getElementById('heroDots').style.display = 'none';
+                return;
+            }
 
-        /* Auto-advance */
-        setInterval(function () {
-            goToSlide(current + 1);
-        }, INTERVAL);
+            /* Show first good slide immediately */
+            let current = 0;
+            good[0].slide.classList.add('active');
+            good[0].dot.classList.add('active');
+
+            /* Only 1 image loaded — show it forever, no cycling needed */
+            if (good.length === 1) return;
+
+            /* Cross-fade to position n within good[] */
+            function goTo(n) {
+                const prev = current;
+                current = ((n % good.length) + good.length) % good.length;
+                if (prev === current) return;
+
+                /* Keep outgoing slide fully visible underneath during transition */
+                good[prev].slide.classList.remove('active');
+                good[prev].slide.classList.add('leaving');
+                good[prev].dot.classList.remove('active');
+
+                /* Fade incoming slide in on top */
+                good[current].slide.classList.add('active');
+                good[current].dot.classList.add('active');
+
+                /* After transition ends, drop the leaving slide to invisible */
+                setTimeout(function () {
+                    good[prev].slide.classList.remove('leaving');
+                }, TRANSITION_MS);
+            }
+
+            /* Expose for dot onclick="goToSlide(0/1/2)" */
+            window.goToSlide = function (sourceIndex) {
+                const pos = good.findIndex(function (g) {
+                    return g === SOURCES[sourceIndex];
+                });
+                if (pos !== -1) goTo(pos);
+            };
+
+            /* Auto-advance through loaded slides only */
+            setInterval(function () { goTo(current + 1); }, INTERVAL);
+        }
 
     })();
     </script>
