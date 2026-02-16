@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="styles.css">
     <style>
 
-        /* ═══════════════════════════════
-           HERO
-        ═══════════════════════════════ */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -22,18 +19,13 @@
             overflow: hidden;
         }
 
-        /* ─── Slideshow ─────────────────────────────────────────
-           All slides stacked absolutely.
-           .active  → opacity 1, z-index 2  (fading IN on top)
-           .leaving → opacity 1, z-index 1  (stays visible underneath)
-           After TRANSITION_MS the JS removes .leaving.
-           A photo is ALWAYS fully opaque — no black gap ever.
-        ────────────────────────────────────────────────────────── */
-        .hero-slides {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
+        /* ── Slideshow stack ──────────────────────────────────────
+           .active  → opacity 1, z 2  (fading IN on top)
+           .leaving → opacity 1, z 1  (stays visible underneath)
+           A real image is ALWAYS fully opaque — never black.
+        ─────────────────────────────────────────────────────────── */
+        .hero-slides { position: absolute; inset: 0; z-index: 0; }
+
         .hero-slide {
             position: absolute;
             inset: 0;
@@ -42,26 +34,18 @@
             opacity: 0;
             z-index: 0;
             transition: opacity 1.4s ease-in-out;
-            display: none; /* hidden until image confirmed loaded */
+            display: none; /* revealed only after image confirmed */
         }
-        .hero-slide.leaving {
-            opacity: 1;
-            z-index: 1;
-        }
-        .hero-slide.active {
-            opacity: 1;
-            z-index: 2;
-        }
+        .hero-slide.leaving { opacity: 1; z-index: 1; }
+        .hero-slide.active  { opacity: 1; z-index: 2; }
 
-        /* Dark overlay */
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(15, 12, 10, 0.70);
+            background: rgba(15,12,10,0.68);
             z-index: 3;
         }
 
-        /* Content sits above overlay */
         .hero-content {
             position: relative;
             z-index: 4;
@@ -71,10 +55,9 @@
             width: 100%;
         }
 
-        /* Code comment prefix */
         .hero-comment {
             font-family: 'Courier New', monospace;
-            color: rgba(212, 175, 55, 0.55);
+            color: rgba(212,175,55,0.55);
             font-size: 0.82rem;
             letter-spacing: 0.18em;
             margin-bottom: 1.6rem;
@@ -82,27 +65,25 @@
             animation: fadeSlideDown 0.7s ease forwards 0.3s;
         }
         @keyframes fadeSlideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from { opacity:0; transform:translateY(-10px); }
+            to   { opacity:1; transform:translateY(0); }
         }
 
-        /* Name */
         .hero-name {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 5vw, 3.8rem);
             font-weight: 900;
-            color: #ffffff;
+            color: #fff;
             letter-spacing: 0.14em;
             margin: 0 0 0.2rem;
             opacity: 0;
             animation: fadeUp 0.9s ease forwards 0.9s;
         }
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(22px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from { opacity:0; transform:translateY(22px); }
+            to   { opacity:1; transform:translateY(0); }
         }
 
-        /* Gold divider */
         .hero-divider {
             width: 0;
             height: 2px;
@@ -110,17 +91,14 @@
             margin: 1rem auto 1.5rem;
             animation: growDivider 0.8s ease forwards 1.6s;
         }
-        @keyframes growDivider {
-            to { width: 200px; }
-        }
+        @keyframes growDivider { to { width:200px; } }
 
-        /* Subtitle row */
         .hero-subtitle {
             font-family: 'Work Sans', sans-serif;
             font-size: clamp(0.85rem, 2vw, 1.15rem);
             font-weight: 300;
             letter-spacing: 0.32em;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255,255,255,0.85);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -129,7 +107,7 @@
         }
         #typedText { white-space: nowrap; }
 
-        /* Cursor — pure CSS, JS never touches it */
+        /* Cursor — pure CSS only, JS never touches this element */
         .cursor {
             display: inline-block;
             width: 2px;
@@ -141,11 +119,10 @@
             animation: blink 0.75s step-end infinite;
         }
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50%       { opacity: 0; }
+            0%,100% { opacity:1; }
+            50%     { opacity:0; }
         }
 
-        /* Email */
         .hero-email { opacity: 0; }
         .hero-email.visible { animation: fadeIn 0.9s ease forwards; }
         .hero-email a {
@@ -156,17 +133,16 @@
             font-size: 0.95rem;
             letter-spacing: 0.08em;
             transition: opacity 0.25s;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            border-bottom: 1px solid rgba(212,175,55,0.35);
             padding-bottom: 2px;
         }
         .hero-email a:hover { opacity: 0.7; }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from { opacity:0; transform:translateY(8px); }
+            to   { opacity:1; transform:translateY(0); }
         }
 
-        /* Scroll indicator */
         .hero-scroll {
             position: absolute;
             bottom: 2.5rem;
@@ -188,8 +164,7 @@
             text-transform: uppercase;
         }
         .scroll-mouse {
-            width: 22px;
-            height: 34px;
+            width: 22px; height: 34px;
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 11px;
             display: flex;
@@ -197,23 +172,20 @@
             padding-top: 5px;
         }
         .scroll-wheel {
-            width: 3px;
-            height: 7px;
+            width: 3px; height: 7px;
             background: #d4af37;
             border-radius: 2px;
             animation: scrollWheel 1.6s ease-in-out infinite;
         }
         @keyframes scrollWheel {
-            0%   { transform: translateY(0); opacity: 1; }
-            80%  { transform: translateY(10px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 0; }
+            0%  { transform:translateY(0);    opacity:1; }
+            80% { transform:translateY(10px); opacity:0; }
+            100%{ transform:translateY(0);    opacity:0; }
         }
 
-        /* Dots */
         .hero-dots {
             position: absolute;
-            bottom: 2.5rem;
-            right: 2.5rem;
+            bottom: 2.5rem; right: 2.5rem;
             z-index: 5;
             display: flex;
             gap: 8px;
@@ -221,24 +193,19 @@
             animation: fadeIn 1s ease forwards 4.5s;
         }
         .hero-dot {
-            width: 6px;
-            height: 6px;
+            width: 6px; height: 6px;
             border-radius: 50%;
             background: rgba(255,255,255,0.3);
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
-            display: none; /* shown only if image loaded */
+            display: none; /* shown per-image by JS */
         }
-        .hero-dot.active {
-            background: #d4af37;
-            transform: scale(1.3);
-        }
+        .hero-dot.active { background: #d4af37; transform: scale(1.3); }
 
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
         <div class="nav-content">
             <a href="index.html" class="logo">Roshan G. Ragel</a>
@@ -256,20 +223,16 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero">
 
-        <!-- Slides — 3 divs, images & visibility set by JS after preload -->
         <div class="hero-slides">
             <div class="hero-slide" id="slide0"></div>
             <div class="hero-slide" id="slide1"></div>
             <div class="hero-slide" id="slide2"></div>
         </div>
 
-        <!-- Overlay -->
         <div class="hero-overlay"></div>
 
-        <!-- Content -->
         <div class="hero-content">
             <p class="hero-comment">// Professor · University of Peradeniya</p>
             <h1 class="hero-name">ROSHAN G. RAGEL</h1>
@@ -283,13 +246,11 @@
             </div>
         </div>
 
-        <!-- Scroll indicator -->
         <div class="hero-scroll">
             <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
             <span>Scroll</span>
         </div>
 
-        <!-- Dots — each revealed only if its image loaded -->
         <div class="hero-dots" id="heroDots">
             <div class="hero-dot" id="dot0"></div>
             <div class="hero-dot" id="dot1"></div>
@@ -298,16 +259,15 @@
 
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Roshan G. Ragel. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
-
     <script>
+
     /* ═══════════════════════════════════════════════════════════
-       1. TYPEWRITER  — cursor blinks forever via pure CSS only
+       1. TYPEWRITER — cursor blinks forever via pure CSS only
     ═══════════════════════════════════════════════════════════ */
     (function () {
         const PHRASES = [
@@ -316,17 +276,11 @@
             "EMBEDDED SYSTEMS · COMPUTER ARCHITECTURE",
             "INSPIRING THE NEXT GENERATION"
         ];
-
         const textEl  = document.getElementById('typedText');
         const emailEl = document.getElementById('heroEmail');
-
-        const START_DELAY   = 1800;
-        const TYPE_SPEED    = 65;
-        const ERASE_SPEED   = 35;
-        const HOLD_AFTER    = 2000;
-        const PAUSE_BETWEEN = 500;
+        const START_DELAY = 1800, TYPE_SPEED = 65, ERASE_SPEED = 35,
+              HOLD_AFTER  = 2000, PAUSE_BETWEEN = 500;
         let emailShown = false;
-
         const delay = ms => new Promise(r => setTimeout(r, ms));
 
         async function typePhrase(str) {
@@ -335,7 +289,6 @@
                 await delay(TYPE_SPEED);
             }
         }
-
         async function erasePhrase() {
             const s = textEl.textContent;
             for (let i = s.length - 1; i >= 0; i--) {
@@ -343,111 +296,135 @@
                 await delay(ERASE_SPEED);
             }
         }
-
         async function run() {
             await delay(START_DELAY);
             let idx = 0;
             while (true) {
                 await typePhrase(PHRASES[idx]);
-                if (!emailShown) {
-                    emailShown = true;
-                    emailEl.classList.add('visible');
-                }
+                if (!emailShown) { emailShown = true; emailEl.classList.add('visible'); }
                 await delay(HOLD_AFTER);
                 await erasePhrase();
                 await delay(PAUSE_BETWEEN);
                 idx = (idx + 1) % PHRASES.length;
             }
         }
-
         run();
     })();
 
 
     /* ═══════════════════════════════════════════════════════════
-       2. SLIDESHOW — only shows slides whose images actually loaded
+       2. SLIDESHOW
        ───────────────────────────────────────────────────────────
-       Each image is preloaded with new Image() before any DOM
-       change. Only slides whose image resolves successfully are
-       shown. Missing images are silently skipped — their slide
-       and dot stay hidden (display:none).
+       Priority per slot:
+         1. Your own local file  (hero-background.jpg etc.)
+         2. Unsplash fallback    (always available online)
 
-       Cross-fade logic (no black flash):
-         • Outgoing gets .leaving → stays opacity:1 at z-index 1
-         • Incoming gets .active  → fades to opacity:1 at z-index 2
-         • After CSS transition completes, .leaving is removed
-         • A photo is ALWAYS fully visible at every moment
+       This means an image is ALWAYS shown — even if you haven't
+       added your own photos yet. Replace the fallback URLs or
+       the local filenames to suit your project.
+
+       Cross-fade: outgoing slide stays at opacity 1 (.leaving,
+       z-index 1) while the incoming fades in on top (.active,
+       z-index 2). No black flash ever.
     ═══════════════════════════════════════════════════════════ */
     (function () {
 
+        /* ── Configure your images here ── */
         const SOURCES = [
-            { src: 'hero-background.jpg',  slide: document.getElementById('slide0'), dot: document.getElementById('dot0') },
-            { src: 'hero-background2.jpg', slide: document.getElementById('slide1'), dot: document.getElementById('dot1') },
-            { src: 'hero-background3.jpg', slide: document.getElementById('slide2'), dot: document.getElementById('dot2') }
+            {
+                local:    'hero-background.jpg',
+                fallback: 'https://images.unsplash.com/photo-1562774053-701939374585?w=1600&q=80',
+                slide:    document.getElementById('slide0'),
+                dot:      document.getElementById('dot0')
+            },
+            {
+                local:    'hero-background2.jpg',
+                fallback: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80',
+                slide:    document.getElementById('slide1'),
+                dot:      document.getElementById('dot1')
+            },
+            {
+                local:    'hero-background3.jpg',
+                fallback: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1600&q=80',
+                slide:    document.getElementById('slide2'),
+                dot:      document.getElementById('dot2')
+            }
         ];
 
-        const INTERVAL      = 5000;
-        const TRANSITION_MS = 1400;
+        const INTERVAL      = 5000;   // ms between slides
+        const TRANSITION_MS = 1400;   // must match CSS transition duration
 
         let pending = SOURCES.length;
-        const good  = []; // only entries whose image loaded OK
+        const good  = [];             // entries with a confirmed image
 
+        /* Try local first, fall back to Unsplash if missing */
         SOURCES.forEach(function (entry) {
-            const img = new Image();
 
-            img.onload = function () {
-                /* Apply background only after confirming the file exists */
-                entry.slide.style.backgroundImage = 'url("' + entry.src + '")';
-                entry.slide.style.display = '';  /* make visible */
-                entry.dot.style.display   = '';
-                good.push(entry);
-                done();
-            };
+            function tryLoad(src, onFail) {
+                const img = new Image();
+                img.onload  = function () { apply(entry, src); };
+                img.onerror = onFail;
+                img.src     = src;
+            }
 
-            img.onerror = function () {
-                /* Image missing or broken — slide & dot stay display:none */
-                done();
-            };
-
-            img.src = entry.src;
+            tryLoad(
+                entry.local,
+                function () {
+                    /* local failed → try fallback */
+                    tryLoad(
+                        entry.fallback,
+                        function () {
+                            /* both failed (offline?) — skip this slot */
+                            pending--;
+                            if (pending === 0) start();
+                        }
+                    );
+                }
+            );
         });
 
-        function done() {
+        function apply(entry, src) {
+            entry.slide.style.backgroundImage = 'url("' + src + '")';
+            entry.slide.style.display = '';   /* make slide visible */
+            entry.dot.style.display   = '';   /* show its dot */
+            good.push(entry);
             pending--;
             if (pending === 0) start();
         }
 
+        /* ── Start slideshow once all preloads have settled ── */
         function start() {
-            /* Nothing loaded — hide dots, nothing to show */
+
             if (good.length === 0) {
+                /* Nothing loaded (fully offline, no local files) */
                 document.getElementById('heroDots').style.display = 'none';
                 return;
             }
 
-            /* Show first good slide immediately */
+            /* Show first image immediately — no fade wait */
             let current = 0;
             good[0].slide.classList.add('active');
             good[0].dot.classList.add('active');
 
-            /* Only 1 image loaded — show it forever, no cycling needed */
+            /* Only 1 image — keep it on screen forever, no timer */
             if (good.length === 1) return;
 
-            /* Cross-fade to position n within good[] */
+            /* ── Cross-fade to index n within good[] ── */
             function goTo(n) {
                 const prev = current;
                 current = ((n % good.length) + good.length) % good.length;
                 if (prev === current) return;
 
-                /* Keep outgoing slide fully visible underneath during transition */
+                /* Outgoing: stays fully visible underneath during cross-fade */
                 good[prev].slide.classList.remove('active');
                 good[prev].slide.classList.add('leaving');
                 good[prev].dot.classList.remove('active');
 
-                /* Fade incoming slide in on top */
+                /* Incoming: fades in on top */
                 good[current].slide.classList.add('active');
                 good[current].dot.classList.add('active');
 
-                /* After transition ends, drop the leaving slide to invisible */
+                /* Drop leaving slide after transition */
                 setTimeout(function () {
                     good[prev].slide.classList.remove('leaving');
                 }, TRANSITION_MS);
@@ -455,18 +432,16 @@
 
             /* Expose for dot onclick="goToSlide(0/1/2)" */
             window.goToSlide = function (sourceIndex) {
-                const pos = good.findIndex(function (g) {
-                    return g === SOURCES[sourceIndex];
-                });
+                const pos = good.findIndex(g => g === SOURCES[sourceIndex]);
                 if (pos !== -1) goTo(pos);
             };
 
-            /* Auto-advance through loaded slides only */
+            /* Auto-advance */
             setInterval(function () { goTo(current + 1); }, INTERVAL);
         }
 
     })();
-    </script>
 
+    </script>
 </body>
 </html>
