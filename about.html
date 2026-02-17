@@ -79,6 +79,13 @@
         }
 
         /* ── Bio with photo float layout ── */
+        .bio-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 2.5rem 2.8rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+        }
+
         .bio-float-section {
             line-height: 1.85;
             font-size: 1.05rem;
@@ -93,7 +100,7 @@
         .bio-photo-float {
             float: right;
             width: 300px;
-            margin: 0 0 2rem 2.5rem;
+            margin: 0.2rem 0 2rem 2.5rem;
             flex-shrink: 0;
         }
 
@@ -103,16 +110,16 @@
             object-fit: cover;
             object-position: top center;
             display: block;
-            border-radius: 4px;
-            border: 1px solid rgba(197, 160, 78, 0.25);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+            border-radius: 6px;
+            border: 3px solid #e8e0cc;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
         }
 
         .bio-photo-caption {
             margin-top: 0.75rem;
             text-align: center;
             font-size: 0.82rem;
-            color: var(--text-secondary, #999);
+            color: #666;
             font-style: italic;
             letter-spacing: 0.03em;
         }
@@ -120,27 +127,33 @@
         .bio-photo-caption strong {
             display: block;
             font-style: normal;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--accent-gold, #c5a04e);
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: #1a6b5c;
             margin-bottom: 0.15rem;
         }
 
         .bio-float-section p {
             margin-bottom: 1.2rem;
-            color: var(--text-primary, #e8e8e8);
+            color: #2c2c2c;
         }
 
         /* Responsive: stack on smaller screens */
         @media (max-width: 768px) {
+            .bio-card {
+                padding: 1.6rem 1.4rem;
+            }
+
             .bio-photo-float {
                 float: none;
                 width: 100%;
-                margin: 0 0 2rem 0;
+                max-width: 280px;
+                margin: 0 auto 2rem auto;
+                display: block;
             }
 
             .bio-photo-float img {
-                height: 340px;
+                height: 320px;
             }
         }
     </style>
@@ -173,6 +186,7 @@
     <!-- Main Content -->
     <main>
         <div class="content-section fade-in">
+            <div class="bio-card">
             <div class="bio-float-section">
 
                 <!-- Photo floated right — text wraps around it -->
@@ -217,6 +231,7 @@
                 </p>
 
             </div>
+            </div><!-- /.bio-card -->
         </div>
 
         <div class="content-section fade-in fade-in-delay-1">
