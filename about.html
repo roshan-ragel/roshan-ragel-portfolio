@@ -77,6 +77,72 @@
             margin-bottom: 1.5rem;
             border-left: 3px solid var(--accent-gold);
         }
+
+        /* ── Bio with photo float layout ── */
+        .bio-float-section {
+            line-height: 1.85;
+            font-size: 1.05rem;
+        }
+
+        .bio-float-section::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .bio-photo-float {
+            float: right;
+            width: 300px;
+            margin: 0 0 2rem 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .bio-photo-float img {
+            width: 100%;
+            height: 370px;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 160, 78, 0.25);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        }
+
+        .bio-photo-caption {
+            margin-top: 0.75rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-secondary, #999);
+            font-style: italic;
+            letter-spacing: 0.03em;
+        }
+
+        .bio-photo-caption strong {
+            display: block;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-gold, #c5a04e);
+            margin-bottom: 0.15rem;
+        }
+
+        .bio-float-section p {
+            margin-bottom: 1.2rem;
+            color: var(--text-primary, #e8e8e8);
+        }
+
+        /* Responsive: stack on smaller screens */
+        @media (max-width: 768px) {
+            .bio-photo-float {
+                float: none;
+                width: 100%;
+                margin: 0 0 2rem 0;
+            }
+
+            .bio-photo-float img {
+                height: 340px;
+            }
+        }
     </style>
 </head>
 <body class="about-page">
@@ -94,7 +160,6 @@
                 <li><a href="speaking.html">Speaking</a></li>
                 <li><a href="presentation.html">Presentation</a></li>
                 <li><a href="students.html">Students</a></li>
-                
             </ul>
         </div>
     </nav>
@@ -107,8 +172,20 @@
 
     <!-- Main Content -->
     <main>
-        <div class="about-content fade-in">
-            <div class="about-text">
+        <div class="content-section fade-in">
+            <div class="bio-float-section">
+
+                <!-- Photo floated right — text wraps around it -->
+                <div class="bio-photo-float">
+                    <img src="roshan-ragel-photo.jpeg" alt="Prof. Roshan G. Ragel">
+                    <div class="bio-photo-caption">
+                        <strong>Prof. Roshan G. Ragel</strong>
+                        Professor of Computer Engineering<br>
+                        University of Peradeniya, Sri Lanka
+                    </div>
+                </div>
+
+                <!-- All bio paragraphs — they flow around the float -->
                 <p>
                     Dr. Ragel was appointed a Senior Lecturer in Computer Engineering at the University of Peradeniya in December 2007 and has been a Professor since October 2017. 
                     He has been a Professional Member of the IEEE and IEEE Computer Society since 2005 and a Senior Member since 2014. He was a visiting research scholar at the UNSW – Sydney many times, 
@@ -121,13 +198,13 @@
                     and 2022 and the best computer scientist in the country from 2023 to 2025. He also won the National Educator Gold Awards 2024 for Computing, given to the best in each field of the Higher Education sector.
                 </p>
                 <p>
-                    Prof Ragel received the 2025 IEEE Computer Society Mary Kenneth Keller Computer Science & Engineering Undergraduate Teaching Award, the first academic to receive this award from the Global South. 
+                    Prof Ragel received the 2025 IEEE Computer Society Mary Kenneth Keller Computer Science &amp; Engineering Undergraduate Teaching Award, the first academic to receive this award from the Global South. 
                     This prestigious honor recognizes his outstanding contributions to undergraduate education through innovative teaching, 
                     impactful research, and dedicated service, fostering an inclusive community of experiential mentorship for undergraduates in Sri Lanka.
                 </p>
                 <p>
                     Prof Ragel has been the consulting chief executive officer at the Lanka Research and Education Network (LEARN), the national NREN, since 2017. With his involvement, LEARN was able to step up for a 
-                    significant milestone by launching the Asi@Connect Project in Sri Lanka in 2017, which brought many opportunities for the LEARN Research and Education (R&E) network community to get involved in utilising the project 
+                    significant milestone by launching the Asi@Connect Project in Sri Lanka in 2017, which brought many opportunities for the LEARN Research and Education (R&amp;E) network community to get involved in utilising the project 
                     resources and funds. He has represented Sri Lanka in the Asi@Connect Governors meeting and has been a Council Member of Asia Pacific Advanced Network (APAN) since 2017. Since 2020, he is also the Vice-Chair of the Asi@Connect Steering Committee. 
                     With COVID-19 lockdowns, LEARN is helping the university community in the country connect and engage in productive research and education activities online.
                 </p>
@@ -138,9 +215,7 @@
                     He is also a founder of the AI Forum for Academics (AIFA). 
                     This academic syndicate explores the opportunities and challenges of GenAI in Higher education based at the University of Peradeniya.
                 </p>
-            </div>
-            <div class="about-image">
-                <img src="roshan-ragel-photo.jpeg" alt="Prof. Roshan G. Ragel" style="width: 100%; height: 100%; object-fit: cover;">
+
             </div>
         </div>
 
@@ -182,7 +257,7 @@
                     <p>Applying computational methods to biological research and bioinformatics challenges.</p>
                 </div>
                 <div class="card">
-                    <h3>Micro-architectural Aspects of Embedded Systems Design & Security</h3>
+                    <h3>Micro-architectural Aspects of Embedded Systems Design &amp; Security</h3>
                     <p>Low-level design considerations and security implications in embedded system architectures.</p>
                 </div>
                 <div class="card">
@@ -203,7 +278,7 @@
         <div class="content-section fade-in fade-in-delay-3">
             <h2>Awards and Honours</h2>
             <div class="list-item">
-                <h3>2025 IEEE Computer Society Mary Kenneth Keller Computer Science & Engineering Undergraduate Teaching Award</h3>
+                <h3>2025 IEEE Computer Society Mary Kenneth Keller Computer Science &amp; Engineering Undergraduate Teaching Award</h3>
                 <p class="date">2025</p>
                 <p>First academic from the Global South to receive this prestigious international award.</p>
             </div>
@@ -219,7 +294,7 @@
             </div>
             <div class="list-item">
                 <h3>Top Scientist in Computer Science in Sri Lanka</h3>
-                <p class="date">2021 & 2022 · AD Scientific Index</p>
+                <p class="date">2021 &amp; 2022 · AD Scientific Index</p>
                 <p>Recognized as top scientist in computer science in Sri Lanka for two consecutive years.</p>
             </div>
             <div class="list-item">
@@ -234,7 +309,7 @@
             </div>
             <div class="list-item">
                 <h3>Presidential Awards for Scientific Publications</h3>
-                <p class="date">2018 & 2023</p>
+                <p class="date">2018 &amp; 2023</p>
                 <p>Awarded twice for exceptional contributions to scientific research and publication in Sri Lanka.</p>
             </div>
             <div class="list-item">
@@ -249,7 +324,7 @@
             </div>
             <div class="list-item">
                 <h3>e-Swabhinami 2012 Award</h3>
-                <p class="date">e-Science & Technology Category · 2012</p>
+                <p class="date">e-Science &amp; Technology Category · 2012</p>
                 <p>For the project titled "Open-source Framework for Lead Identification in Drug Design".</p>
             </div>
             <div class="list-item">
@@ -263,7 +338,7 @@
                 <p>Organized by School of Law at University of New Hampshire.</p>
             </div>
             <div class="list-item">
-                <h3>Best Student Paper Award for ICT & Social Transformation Track</h3>
+                <h3>Best Student Paper Award for ICT &amp; Social Transformation Track</h3>
                 <p class="date">The 5th International Conference on Information and Automation for Sustainability (ICIAfS2010)</p>
                 <p>Awarded for outstanding student paper presentation.</p>
             </div>
@@ -321,8 +396,6 @@
                 <p>Academic syndicate exploring opportunities and challenges of GenAI in Higher Education.</p>
             </div>
         </div>
-
-        
     </main>
 
     <!-- Footer -->
