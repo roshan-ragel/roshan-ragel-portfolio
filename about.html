@@ -256,7 +256,7 @@
             order: 2;
             display: flex;
             flex-direction: column;
-            gap: 0;
+            gap: 1.5rem;
             position: sticky;
             top: 90px;
         }
@@ -265,11 +265,12 @@
             position: relative;
             border-radius: 8px;
             overflow: hidden;
-            border: 2px solid rgba(201, 158, 61, 0.3);
+            border: 2px solid rgba(201, 158, 61, 0.4);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             width: 100%;
             line-height: 0;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
+            display: block;
         }
 
         .about-image img {
@@ -277,6 +278,7 @@
             height: auto;
             display: block;
             object-fit: cover;
+            vertical-align: bottom;
         }
 
         .about-image::after {
@@ -301,6 +303,7 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            padding-top: 0.5rem;
         }
 
         /* Major Positions Box */
