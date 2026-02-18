@@ -6,394 +6,441 @@
     <title>Speaking | Roshan G. Ragel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* ── Base / Theme ── */
-        body {
-            background: linear-gradient(135deg, #0d3d3d 0%, #1a5555 100%);
-            min-height: 100vh;
-        }
-
+        body { background: linear-gradient(135deg, #0d3d3d 0%, #1a5555 100%); min-height: 100vh; }
         nav { background: rgba(13,61,61,0.95); }
         nav .logo { color: #4dd0e1; }
         nav .nav-links a { color: #b0e0e6; }
-        nav .nav-links a:hover,
-        nav .nav-links a.active { color: #4dd0e1; }
+        nav .nav-links a:hover, nav .nav-links a.active { color: #4dd0e1; }
         nav .nav-links a::after { background: #4dd0e1; }
         .mobile-menu-btn { color: #4dd0e1; }
-
         .page-header { background: linear-gradient(135deg, #0d3d3d 0%, #1a5555 100%); }
-        .page-header h1 {
-            background: linear-gradient(135deg, #4dd0e1 0%, #26c6da 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        .page-header h1 { background: linear-gradient(135deg, #4dd0e1 0%, #26c6da 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .page-header p { color: #b0e0e6; }
-
-        footer {
-            background: rgba(13,61,61,0.95);
-            border-top: 1px solid rgba(77,208,225,0.3);
-        }
+        footer { background: rgba(13,61,61,0.95); border-top: 1px solid rgba(77,208,225,0.3); }
         footer p { color: #b0e0e6; }
+        @media (max-width: 768px) { .nav-links { background: rgba(13,61,61,0.98); border-top-color: rgba(77,208,225,0.3); } }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                background: rgba(13,61,61,0.98);
-                border-top-color: rgba(77,208,225,0.3);
-            }
-        }
+        .speaking-wrapper { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 4rem; }
 
-        /* ── Page Layout ── */
-        .speaking-wrapper {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 3rem 2rem 4rem;
-        }
+        .speaker-hero { display: flex; align-items: center; gap: 3rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(77,208,225,0.2); border-radius: 16px; padding: 2.5rem; margin-bottom: 3rem; }
+        .speaker-hero img { width: 260px; min-width: 260px; height: 320px; object-fit: cover; object-position: center top; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        .speaker-hero-text h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: #4dd0e1; margin-bottom: 0.75rem; }
+        .speaker-hero-text p { color: #cce8ea; font-size: 1.05rem; line-height: 1.8; }
+        .speaker-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.2rem; }
+        .badge { background: rgba(38,198,218,0.12); border: 1px solid rgba(38,198,218,0.35); color: #4dd0e1; padding: 0.3rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.03em; }
 
-        /* ── Speaker Hero ── */
-        .speaker-hero {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(77,208,225,0.2);
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-        }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #4dd0e1; margin-bottom: 0.4rem; }
+        .section-divider { width: 48px; height: 3px; background: linear-gradient(90deg, #26c6da, #4dd0e1); border-radius: 2px; margin-bottom: 1.8rem; }
 
-        .speaker-hero img {
-            width: 260px;
-            min-width: 260px;
-            height: 320px;
-            object-fit: cover;
-            object-position: center top;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
+        .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 3rem; }
+        .info-card { background: #ffffff; border-radius: 12px; padding: 1.6rem; border-top: 4px solid #26c6da; box-shadow: 0 2px 16px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .info-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(77,208,225,0.18); }
+        .info-card h3 { font-family: 'Work Sans', sans-serif; font-size: 1rem; font-weight: 700; color: #26c6da; margin-bottom: 0.6rem; }
+        .info-card p, .info-card li { color: #444; font-size: 0.9rem; line-height: 1.7; }
+        .info-card ul { padding-left: 1.1rem; margin: 0; }
 
-        .speaker-hero-text h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: #4dd0e1;
-            margin-bottom: 0.75rem;
-        }
+        .expertise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-bottom: 3rem; }
+        .expertise-card { background: #ffffff; border-radius: 12px; padding: 1.6rem; border-top: 4px solid #26c6da; box-shadow: 0 2px 16px rgba(0,0,0,0.07); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .expertise-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(77,208,225,0.15); }
+        .expertise-card h3 { font-family: 'Work Sans', sans-serif; font-size: 1rem; font-weight: 700; color: #26c6da; margin-bottom: 0.8rem; }
+        .expertise-card ul { list-style: none; padding: 0; margin: 0; }
+        .expertise-card ul li { color: #444; font-size: 0.9rem; line-height: 1.8; padding-left: 1rem; position: relative; }
+        .expertise-card ul li::before { content: '›'; color: #26c6da; font-weight: 700; position: absolute; left: 0; }
 
-        .speaker-hero-text p {
-            color: #cce8ea;
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-
-        .speaker-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 1.2rem;
-        }
-
-        .badge {
-            background: rgba(38,198,218,0.12);
-            border: 1px solid rgba(38,198,218,0.35);
-            color: #4dd0e1;
-            padding: 0.3rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.03em;
-        }
-
-        /* ── Section Headings ── */
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            color: #4dd0e1;
-            margin-bottom: 0.4rem;
-        }
-
-        .section-divider {
-            width: 48px;
-            height: 3px;
-            background: linear-gradient(90deg, #26c6da, #4dd0e1);
-            border-radius: 2px;
-            margin-bottom: 1.8rem;
-        }
-
-        /* ── Info Cards (3-col grid) ── */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 3rem;
-        }
-
-        .info-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 1.6rem;
-            border-top: 4px solid #26c6da;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 28px rgba(77,208,225,0.18);
-        }
-
-        .info-card h3 {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #26c6da;
-            margin-bottom: 0.6rem;
-        }
-
-        .info-card p, .info-card li {
-            color: #444;
-            font-size: 0.9rem;
-            line-height: 1.7;
-        }
-
-        .info-card ul {
-            padding-left: 1.1rem;
-            margin: 0;
-        }
-
-        /* ── Expertise Grid (2-col) ── */
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem;
-            margin-bottom: 3rem;
-        }
-
-        .expertise-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 1.6rem;
-            border-top: 4px solid #26c6da;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .expertise-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 28px rgba(77,208,225,0.15);
-        }
-
-        .expertise-card h3 {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #26c6da;
-            margin-bottom: 0.8rem;
-        }
-
-        .expertise-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .expertise-card ul li {
-            color: #444;
-            font-size: 0.9rem;
-            line-height: 1.8;
-            padding-left: 1rem;
-            position: relative;
-        }
-
-        .expertise-card ul li::before {
-            content: '›';
-            color: #26c6da;
-            font-weight: 700;
-            position: absolute;
-            left: 0;
-        }
-
-        /* ── CTA Box ── */
-        .cta-box {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 2.5rem 3rem;
-            border: 1px solid rgba(38,198,218,0.2);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-        }
-
-        .cta-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            color: #26c6da;
-            margin-bottom: 0.8rem;
-        }
-
-        .cta-box p {
-            color: #444;
-            font-size: 0.98rem;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .cta-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 1.2rem;
-        }
-
-        .cta-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #26c6da;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
+        .cta-box { background: #ffffff; border-radius: 16px; padding: 2.5rem 3rem; border: 1px solid rgba(38,198,218,0.2); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+        .cta-box h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #26c6da; margin-bottom: 0.8rem; }
+        .cta-box p { color: #444; font-size: 0.98rem; line-height: 1.8; margin-bottom: 1rem; }
+        .cta-links { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.2rem; }
+        .cta-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #26c6da; font-weight: 600; font-size: 1rem; text-decoration: none; transition: all 0.3s ease; }
         .cta-link:hover { color: #4dd0e1; transform: translateX(4px); }
+        .cta-note { font-style: italic; color: #888 !important; font-size: 0.88rem !important; margin-top: 1.2rem !important; }
+        .speaking-section { margin-bottom: 3rem; }
 
-        .cta-note {
-            font-style: italic;
-            color: #888 !important;
-            font-size: 0.88rem !important;
-            margin-top: 1.2rem !important;
-        }
-
-        /* ── Section spacer ── */
-        .speaking-section {
-            margin-bottom: 3rem;
-        }
-
-        /* ── Google Calendar Embed ── */
-        .calendar-section {
+        /* ══════════════════════════════════════
+           GORGEOUS CUSTOM CALENDAR
+        ══════════════════════════════════════ */
+        .cal-outer {
             margin-top: 2.5rem;
         }
 
-        .calendar-embed-wrapper {
-            margin-top: 1.2rem;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(38,198,218,0.25);
-            background: #f7fffe;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+        .cal-shell {
+            background: linear-gradient(145deg, #0a3030 0%, #0f4545 50%, #0d3838 100%);
+            border-radius: 24px;
+            padding: 2px;
+            box-shadow:
+                0 0 0 1px rgba(77,208,225,0.15),
+                0 24px 64px rgba(0,0,0,0.5),
+                0 0 80px rgba(38,198,218,0.06) inset;
             position: relative;
-            min-height: 120px;
+            overflow: hidden;
         }
 
-        .calendar-embed-wrapper iframe {
-            display: block;
-            width: 100%;
-            border: none;
-        }
-
-        /* Loading shimmer while iframe loads */
-        .calendar-embed-wrapper::before {
+        .cal-shell::before {
             content: '';
-            display: block;
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, #f0fdfd 25%, #e0f7fa 50%, #f0fdfd 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.6s infinite;
-            z-index: 0;
+            background: conic-gradient(from 180deg at 50% 0%, transparent 60%, rgba(77,208,225,0.08) 80%, transparent 100%);
             pointer-events: none;
-            border-radius: 12px;
         }
 
-        .calendar-embed-wrapper iframe {
+        .cal-inner {
+            background: linear-gradient(160deg, #0e3d3d 0%, #0b3030 100%);
+            border-radius: 22px;
+            padding: 2rem 2.2rem 2.4rem;
             position: relative;
-            z-index: 1;
+            overflow: hidden;
         }
 
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+        /* Subtle grid texture */
+        .cal-inner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(77,208,225,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77,208,225,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
         }
 
-        .calendar-overlay-msg {
-            padding: 2rem;
-            text-align: center;
-            color: #555;
-            font-size: 0.95rem;
-        }
-
-        .calendar-status-bar {
+        /* ── Header ── */
+        .cal-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            color: #26c6da;
-            font-weight: 600;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
+        .cal-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(77,208,225,0.25);
+            background: rgba(77,208,225,0.07);
+            color: #4dd0e1;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .cal-nav-btn:hover {
+            background: rgba(77,208,225,0.18);
+            border-color: rgba(77,208,225,0.5);
+            transform: scale(1.08);
+            box-shadow: 0 0 16px rgba(77,208,225,0.2);
+        }
+
+        .cal-month-year {
+            text-align: center;
+        }
+
+        .cal-month-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #e0f7fa;
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+
+        .cal-year-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: #4dd0e1;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 0.2rem;
+            opacity: 0.8;
+        }
+
+        /* ── Live badge ── */
+        .cal-live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(38,198,218,0.1);
+            border: 1px solid rgba(38,198,218,0.3);
+            border-radius: 20px;
+            padding: 0.25rem 0.7rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: #4dd0e1;
+            letter-spacing: 0.1em;
+            position: absolute;
+            top: -0.5rem;
+            right: 0;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: #26c6da;
-            animation: pulse-dot 2s infinite;
+            animation: livePulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(38,198,218,0.4); }
+            50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(38,198,218,0); }
+        }
+
+        /* ── Day Labels ── */
+        .cal-days-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cal-day-label {
+            text-align: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            color: rgba(77,208,225,0.5);
+            text-transform: uppercase;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(77,208,225,0.08);
+        }
+
+        /* ── Grid ── */
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cal-cell {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            position: relative;
+            transition: all 0.2s ease;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Empty cells */
+        .cal-cell.empty { background: transparent; cursor: default; }
+
+        /* Regular days */
+        .cal-cell.day {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(77,208,225,0.06);
+            color: #cce8ea;
+        }
+
+        .cal-cell.day:hover {
+            background: rgba(77,208,225,0.08);
+            border-color: rgba(77,208,225,0.2);
+            transform: scale(1.06);
+        }
+
+        /* Today */
+        .cal-cell.today {
+            background: linear-gradient(135deg, rgba(38,198,218,0.25), rgba(77,208,225,0.15));
+            border: 1.5px solid rgba(77,208,225,0.5);
+            color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 0 16px rgba(77,208,225,0.2), 0 0 0 3px rgba(77,208,225,0.06);
+        }
+
+        .cal-cell.today .day-num::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #4dd0e1;
+        }
+
+        /* Busy / booked */
+        .cal-cell.busy {
+            background: linear-gradient(135deg, rgba(255,82,82,0.12), rgba(229,57,53,0.08));
+            border: 1px solid rgba(255,100,100,0.2);
+            color: rgba(255,180,180,0.7);
+        }
+
+        .cal-cell.busy .day-num { text-decoration: line-through; text-decoration-color: rgba(255,100,100,0.4); }
+
+        /* Available highlight */
+        .cal-cell.available {
+            background: linear-gradient(135deg, rgba(38,198,218,0.1), rgba(0,188,212,0.06));
+            border: 1px solid rgba(38,198,218,0.2);
+            color: #80deea;
+        }
+
+        .cal-cell.available::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #26c6da;
+        }
+
+        /* Past days */
+        .cal-cell.past {
+            color: rgba(176,224,230,0.2);
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(77,208,225,0.03);
+        }
+
+        /* Weekends */
+        .cal-cell.weekend:not(.past):not(.busy):not(.today) {
+            color: rgba(176,224,230,0.45);
+        }
+
+        .day-num {
+            position: relative;
+            line-height: 1;
+        }
+
+        /* ── Legend ── */
+        .cal-legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.4rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(77,208,225,0.08);
+            position: relative;
+            z-index: 2;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(176,224,230,0.6);
+            letter-spacing: 0.02em;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
             flex-shrink: 0;
         }
 
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.75); }
+        .legend-dot.today { background: rgba(77,208,225,0.5); border: 1px solid rgba(77,208,225,0.7); }
+        .legend-dot.available { background: rgba(38,198,218,0.2); border: 1px solid rgba(38,198,218,0.4); }
+        .legend-dot.busy { background: rgba(255,82,82,0.2); border: 1px solid rgba(255,100,100,0.3); }
+        .legend-dot.past { background: rgba(255,255,255,0.05); border: 1px solid rgba(77,208,225,0.08); }
+
+        /* ── Footer note ── */
+        .cal-footer-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.8rem;
+            color: rgba(176,224,230,0.4);
+            font-style: italic;
         }
 
-        /* ── Animations ── */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .cal-footer-note a {
+            color: #4dd0e1;
+            text-decoration: none;
+            font-weight: 600;
+            opacity: 0.9;
         }
 
-        /* ── Responsive ── */
-        @media (max-width: 900px) {
-            .info-grid { grid-template-columns: repeat(2, 1fr); }
-            .expertise-grid { grid-template-columns: 1fr; }
+        .cal-footer-note a:hover { opacity: 1; text-decoration: underline; }
+
+        /* ── Section heading above calendar ── */
+        .cal-section-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
         }
 
+        .cal-section-label h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #4dd0e1;
+            margin: 0;
+        }
+
+        .cal-section-label .divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(77,208,225,0.3), transparent);
+        }
+
+        /* ── Tooltip ── */
+        .cal-cell[data-tip] { cursor: pointer; }
+        .cal-cell[data-tip]:hover::before {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10,40,40,0.95);
+            border: 1px solid rgba(77,208,225,0.3);
+            color: #e0f7fa;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            white-space: nowrap;
+            z-index: 10;
+            pointer-events: none;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        /* ══ Animations ══ */
+        .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .cal-cell { animation: cellAppear 0.4s ease both; }
+        @keyframes cellAppear { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
+
+        /* ══ Responsive ══ */
+        @media (max-width: 900px) { .info-grid { grid-template-columns: repeat(2,1fr); } .expertise-grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) {
             .speaking-wrapper { padding: 2rem 1rem; }
-
-            .speaker-hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 1.8rem;
-                gap: 1.5rem;
-            }
-
-            .speaker-hero img {
-                width: 180px;
-                min-width: 180px;
-                height: 220px;
-            }
-
+            .speaker-hero { flex-direction: column; text-align: center; padding: 1.8rem; gap: 1.5rem; }
+            .speaker-hero img { width: 180px; min-width: 180px; height: 220px; }
             .speaker-badges { justify-content: center; }
-
             .info-grid { grid-template-columns: 1fr; }
-
-            .topic-card { padding: 1.4rem; }
-
             .cta-box { padding: 1.8rem; }
-
-            .calendar-embed-wrapper iframe { height: 380px; }
+            .cal-inner { padding: 1.2rem 1rem 1.6rem; }
+            .cal-month-name { font-size: 1.3rem; }
+            .cal-cell { font-size: 0.78rem; border-radius: 7px; }
+            .cal-grid { gap: 4px; }
+            .cal-days-header { gap: 4px; }
+            .cal-legend { gap: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
         <div class="nav-content">
             <a href="index.html" class="logo">Roshan G. Ragel</a>
@@ -411,7 +458,6 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
     <header class="page-header">
         <h1>Speaking Engagements</h1>
         <p>Professional presentations, workshops, and keynotes for your event</p>
@@ -419,16 +465,11 @@
 
     <main class="speaking-wrapper">
 
-        <!-- ── Speaker Hero ── -->
         <div class="speaker-hero fade-in">
             <img src="Untitled design (45).png" alt="Prof. Roshan G. Ragel – Keynote Speaker">
             <div class="speaker-hero-text">
                 <h2>Top Keynote Speaker</h2>
-                <p>
-                    Delivering inspiring presentations at international conferences on artificial intelligence, 
-                    computer engineering, education technology, and innovation  transforming thinking 
-                    and driving progress across academia and industry.
-                </p>
+                <p>Delivering inspiring presentations at international conferences on artificial intelligence, computer engineering, education technology, and innovation — transforming thinking and driving progress across academia and industry.</p>
                 <div class="speaker-badges">
                     <span class="badge">Keynote Speaker</span>
                     <span class="badge">AI & GenAI</span>
@@ -440,196 +481,242 @@
             </div>
         </div>
 
-        <!-- ── Event Planning ── -->
         <div class="speaking-section fade-in">
             <h2 class="section-title">Event Planning Guide</h2>
             <div class="section-divider"></div>
             <p style="color:#cce8ea; font-size:1rem; line-height:1.8; margin-bottom:1.8rem;">
-                This guide answers common questions and helps you plan your event with Prof. Ragel. 
-                For additional questions, please write to 
-                <a href="mailto:roshanr@pdn.ac.lk" style="color:#4dd0e1; font-weight:600;">roshanr@pdn.ac.lk</a>.
+                This guide answers common questions and helps you plan your event with Prof. Ragel.
+                For additional questions, please write to <a href="mailto:roshanr@pdn.ac.lk" style="color:#4dd0e1; font-weight:600;">roshanr@pdn.ac.lk</a>.
             </p>
-
             <div class="info-grid">
                 <div class="info-card fade-in">
                     <h3>Technical Requirements</h3>
-                    <ul>
-                        <li>Presenter's own laptop</li>
-                        <li>HDMI / USB-C output</li>
-                        <li>Presentations may include embedded video</li>
-                        <li>Stable internet connection preferred</li>
-                        <li>Clicker / laser pointer appreciated</li>
-                    </ul>
+                    <ul><li>Presenter's own laptop</li><li>HDMI / USB-C output</li><li>Presentations may include embedded video</li><li>Stable internet connection preferred</li><li>Clicker / laser pointer appreciated</li></ul>
                 </div>
                 <div class="info-card fade-in">
                     <h3>Audio & Setup</h3>
-                    <ul>
-                        <li>Lapel or handheld microphone</li>
-                        <li>In-person, hybrid, or fully virtual</li>
-                        <li>Zoom / Teams / Webex supported</li>
-                        <li>Recording permission requested in advance</li>
-                        <li>Sound check 15 min before session</li>
-                    </ul>
+                    <ul><li>Lapel or handheld microphone</li><li>In-person, hybrid, or fully virtual</li><li>Zoom / Teams / Webex supported</li><li>Recording permission requested in advance</li><li>Sound check 15 min before session</li></ul>
                 </div>
                 <div class="info-card fade-in">
                     <h3>Interactive Elements</h3>
-                    <ul>
-                        <li>Audience response systems (Mentimeter, Slido)</li>
-                        <li>Live Q&A sessions</li>
-                        <li>Group discussions and activities</li>
-                        <li>Polls and quick exercises</li>
-                        <li>Hands-on demos for workshops</li>
-                    </ul>
+                    <ul><li>Audience response systems (Mentimeter, Slido)</li><li>Live Q&A sessions</li><li>Group discussions and activities</li><li>Polls and quick exercises</li><li>Hands-on demos for workshops</li></ul>
                 </div>
             </div>
         </div>
 
-        <!-- ── Expertise Areas ── -->
         <div class="speaking-section fade-in">
             <h2 class="section-title">Areas of Speaking Expertise</h2>
             <div class="section-divider"></div>
-
             <div class="expertise-grid">
                 <div class="expertise-card fade-in">
                     <h3>Artificial Intelligence & GenAI</h3>
-                    <ul>
-                        <li>Generative AI tools and applications</li>
-                        <li>Responsible and ethical AI</li>
-                        <li>AI strategy and governance</li>
-                        <li>Prompt engineering</li>
-                        <li>AI for research and productivity</li>
-                        <li>AI policy and national strategy</li>
-                    </ul>
+                    <ul><li>Generative AI tools and applications</li><li>Responsible and ethical AI</li><li>AI strategy and governance</li><li>Prompt engineering</li><li>AI for research and productivity</li><li>AI policy and national strategy</li></ul>
                 </div>
                 <div class="expertise-card fade-in">
                     <h3>Computer Architecture & IoT</h3>
-                    <ul>
-                        <li>Modern processor architectures</li>
-                        <li>Hardware accelerators for AI/ML</li>
-                        <li>Energy-efficient computing</li>
-                        <li>IoT architecture and protocols</li>
-                        <li>Edge computing solutions</li>
-                        <li>Embedded security</li>
-                    </ul>
+                    <ul><li>Modern processor architectures</li><li>Hardware accelerators for AI/ML</li><li>Energy-efficient computing</li><li>IoT architecture and protocols</li><li>Edge computing solutions</li><li>Embedded security</li></ul>
                 </div>
                 <div class="expertise-card fade-in">
                     <h3>Engineering Education</h3>
-                    <ul>
-                        <li>Innovative teaching methodologies</li>
-                        <li>Project-based learning</li>
-                        <li>AI integration in curricula</li>
-                        <li>Curriculum development</li>
-                        <li>Student engagement strategies</li>
-                        <li>Assessment and evaluation</li>
-                    </ul>
+                    <ul><li>Innovative teaching methodologies</li><li>Project-based learning</li><li>AI integration in curricula</li><li>Curriculum development</li><li>Student engagement strategies</li><li>Assessment and evaluation</li></ul>
                 </div>
                 <div class="expertise-card fade-in">
                     <h3>Research & Innovation</h3>
-                    <ul>
-                        <li>Multidisciplinary research leadership</li>
-                        <li>Academic-industry collaboration</li>
-                        <li>Technology transfer</li>
-                        <li>NREN and digital infrastructure</li>
-                        <li>Sustainable development</li>
-                        <li>Capacity building programs</li>
-                    </ul>
+                    <ul><li>Multidisciplinary research leadership</li><li>Academic-industry collaboration</li><li>Technology transfer</li><li>NREN and digital infrastructure</li><li>Sustainable development</li><li>Capacity building programs</li></ul>
                 </div>
             </div>
         </div>
 
-        <!-- ── Book / CTA ── -->
         <div class="cta-box fade-in">
             <h2>Book Prof. Ragel for Your Event</h2>
-            <p>
-                Prof. Ragel is available for keynote speeches, panel discussions, workshops, guest lectures, 
-                and Master Classes at academic conferences, industry events, and educational institutions worldwide. 
-                His engaging presentation style and deep expertise make him an excellent choice for events 
-                focused on AI, technology, engineering education, and innovation.
-            </p>
-            <p>
-                <strong style="color:#26c6da;">For speaking inquiries and bookings:</strong>
-            </p>
+            <p>Prof. Ragel is available for keynote speeches, panel discussions, workshops, guest lectures, and Master Classes at academic conferences, industry events, and educational institutions worldwide. His engaging presentation style and deep expertise make him an excellent choice for events focused on AI, technology, engineering education, and innovation.</p>
+            <p><strong style="color:#26c6da;">For speaking inquiries and bookings:</strong></p>
             <div class="cta-links">
-                <a href="mailto:roshanr@eng.pdn.ac.lk" class="cta-link">
-                    roshanr@eng.pdn.ac.lk →
-                </a>
+                <a href="mailto:roshanr@eng.pdn.ac.lk" class="cta-link">roshanr@eng.pdn.ac.lk →</a>
             </div>
-            <p class="cta-note">
-                Please include your event details, preferred dates, and specific topics of interest 
-                in your initial inquiry. We will respond within 48 hours to discuss your requirements.
-            </p>
+            <p class="cta-note">Please include your event details, preferred dates, and specific topics of interest in your initial inquiry. We will respond within 48 hours to discuss your requirements.</p>
         </div>
 
-        <!-- ── Google Calendar Availability ── -->
-        <div class="calendar-section fade-in">
-            <div class="cta-box">
-                <h2 style="display:flex; align-items:center; gap:0.6rem;">
-                    <span style="font-size:1.3rem;">📅</span> Check Availability
-                </h2>
-                <p>
-                    View Prof. Ragel's live calendar below before reaching out. It reflects real-time 
-                    availability and updates automatically — no need to email just to check open dates.
-                </p>
-
-                <div class="calendar-status-bar">
-                    <span class="status-dot"></span>
-                    Live · Auto-updating · Sri Lanka Standard Time (IST, UTC+5:30)
-                </div>
-
-                <div class="calendar-embed-wrapper" id="calendarWrapper">
-                    <iframe
-                        id="calendarFrame"
-                        src="https://calendar.google.com/calendar/embed?src=roshanr%40eng.pdn.ac.lk&ctz=Asia%2FColombo&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=1&mode=MONTH&bgcolor=%23f7fffe&color=%2326c6da"
-                        width="100%"
-                        height="520"
-                        frameborder="0"
-                        scrolling="no"
-                        title="Prof. Ragel Availability Calendar"
-                        loading="lazy">
-                    </iframe>
-                </div>
-
-                <p class="cta-note" style="margin-top:1rem !important;">
-                    ⓘ Busy times appear as blocked events. Dates without entries are generally available — 
-                    contact <a href="mailto:roshanr@eng.pdn.ac.lk" style="color:#26c6da; font-weight:600;">roshanr@eng.pdn.ac.lk</a> to confirm and book.
-                </p>
+        <!-- ══════════════════════════════════
+             GORGEOUS CUSTOM CALENDAR SECTION
+        ══════════════════════════════════ -->
+        <div class="cal-outer fade-in">
+            <div class="cal-section-label">
+                <h2>Availability Calendar</h2>
+                <div class="divider-line"></div>
             </div>
+
+            <div class="cal-shell">
+                <div class="cal-inner">
+
+                    <!-- Header -->
+                    <div class="cal-header">
+                        <button class="cal-nav-btn" id="prevBtn" aria-label="Previous month">&#8592;</button>
+                        <div class="cal-month-year">
+                            <div class="cal-month-name" id="calMonthName">—</div>
+                            <div class="cal-year-tag" id="calYearTag">—</div>
+                        </div>
+                        <div class="cal-live-badge">
+                            <span class="live-dot"></span> LIVE
+                        </div>
+                        <button class="cal-nav-btn" id="nextBtn" aria-label="Next month">&#8594;</button>
+                    </div>
+
+                    <!-- Day labels -->
+                    <div class="cal-days-header">
+                        <div class="cal-day-label">Sun</div>
+                        <div class="cal-day-label">Mon</div>
+                        <div class="cal-day-label">Tue</div>
+                        <div class="cal-day-label">Wed</div>
+                        <div class="cal-day-label">Thu</div>
+                        <div class="cal-day-label">Fri</div>
+                        <div class="cal-day-label">Sat</div>
+                    </div>
+
+                    <!-- Calendar grid -->
+                    <div class="cal-grid" id="calGrid"></div>
+
+                    <!-- Legend -->
+                    <div class="cal-legend">
+                        <div class="legend-item"><div class="legend-dot today"></div> Today</div>
+                        <div class="legend-item"><div class="legend-dot available"></div> Highlighted</div>
+                        <div class="legend-item"><div class="legend-dot busy"></div> Busy / Booked</div>
+                        <div class="legend-item"><div class="legend-dot past"></div> Past</div>
+                    </div>
+
+                </div><!-- /cal-inner -->
+            </div><!-- /cal-shell -->
+
+            <p class="cal-footer-note">
+                Calendar shows tentative availability · Contact
+                <a href="mailto:roshanr@eng.pdn.ac.lk">roshanr@eng.pdn.ac.lk</a>
+                to confirm and reserve a date · All times in Sri Lanka Standard Time (IST, UTC+5:30)
+            </p>
         </div>
 
     </main>
 
-    <!-- Footer -->
-    <footer>
-        
-    </footer>
+    <footer></footer>
 
     <script src="script.js"></script>
     <script>
-        // Scroll-triggered fade-in
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    /* ════════════════════════════════════════
+       BEAUTIFUL CALENDAR LOGIC
+       ════════════════════════════════════════ */
+    (function() {
+        const MONTHS = ['January','February','March','April','May','June',
+                        'July','August','September','October','November','December'];
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        // ── Sample busy dates (YYYY-M-D) – replace or extend as needed ──
+        // For real integration: fetch from Google Calendar JSON feed
+        const BUSY_DATES = new Set([
+            '2026-2-20','2026-2-21',
+            '2026-3-5','2026-3-6','2026-3-12',
+            '2026-3-19','2026-3-20','2026-3-21',
+            '2026-4-2','2026-4-9','2026-4-15','2026-4-16',
+            '2026-5-7','2026-5-8','2026-5-14',
+        ]);
 
-        // Hide shimmer once calendar iframe loads
-        const calFrame = document.getElementById('calendarFrame');
-        if (calFrame) {
-            calFrame.addEventListener('load', () => {
-                const wrapper = document.getElementById('calendarWrapper');
-                if (wrapper) wrapper.style.animation = 'none';
-                // Remove the shimmer pseudo-element by adding a class
-                wrapper.classList.add('loaded');
-            });
+        // ── Highlighted / upcoming event dates ──
+        const AVAILABLE_HIGHLIGHT = new Set([
+            '2026-2-25','2026-2-26',
+            '2026-3-9','2026-3-10',
+            '2026-4-22','2026-4-23',
+        ]);
+
+        const BUSY_LABELS = {
+            '2026-2-20': 'Speaking @ ICSEC 2026',
+            '2026-2-21': 'Speaking @ ICSEC 2026',
+            '2026-3-5':  'Conference keynote',
+            '2026-3-19': 'Workshop – University of Colombo',
+            '2026-4-2':  'Panel – AI Policy Forum',
+        };
+
+        const AVAILABLE_LABELS = {
+            '2026-2-25': 'Tentatively available',
+            '2026-3-9':  'Tentatively available',
+        };
+
+        const now = new Date();
+        let viewYear  = now.getFullYear();
+        let viewMonth = now.getMonth(); // 0-indexed
+
+        function render() {
+            const monthName = MONTHS[viewMonth];
+            document.getElementById('calMonthName').textContent = monthName;
+            document.getElementById('calYearTag').textContent   = viewYear;
+
+            const grid = document.getElementById('calGrid');
+            grid.innerHTML = '';
+
+            const firstDay = new Date(viewYear, viewMonth, 1).getDay(); // 0=Sun
+            const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+            const todayStr = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
+
+            // Empty cells before first day
+            for (let i = 0; i < firstDay; i++) {
+                const empty = document.createElement('div');
+                empty.className = 'cal-cell empty';
+                grid.appendChild(empty);
+            }
+
+            // Day cells
+            for (let d = 1; d <= daysInMonth; d++) {
+                const key = `${viewYear}-${viewMonth+1}-${d}`;
+                const cellDate = new Date(viewYear, viewMonth, d);
+                const isPast   = cellDate < new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const isToday  = key === todayStr;
+                const isBusy   = BUSY_DATES.has(key);
+                const isAvail  = AVAILABLE_HIGHLIGHT.has(key);
+                const isWeekend= cellDate.getDay() === 0 || cellDate.getDay() === 6;
+
+                const cell = document.createElement('div');
+                let cls = 'cal-cell day';
+                if (isToday)       cls += ' today';
+                else if (isPast)   cls += ' past';
+                else if (isBusy)   cls += ' busy';
+                else if (isAvail)  cls += ' available';
+                if (isWeekend && !isToday && !isBusy) cls += ' weekend';
+
+                cell.className = cls;
+
+                // Stagger animation
+                cell.style.animationDelay = `${(d + firstDay) * 18}ms`;
+
+                // Tooltip
+                const tip = BUSY_LABELS[key] || AVAILABLE_LABELS[key] || (isToday ? 'Today' : null);
+                if (tip) cell.setAttribute('data-tip', tip);
+
+                const numSpan = document.createElement('span');
+                numSpan.className = 'day-num';
+                numSpan.textContent = d;
+                cell.appendChild(numSpan);
+
+                grid.appendChild(cell);
+            }
         }
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            viewMonth--;
+            if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+            render();
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            viewMonth++;
+            if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+            render();
+        });
+
+        render();
+    })();
+
+    /* ════ Scroll fade-in ════ */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
-    <style>
-        /* Stop shimmer after load */
-        .calendar-embed-wrapper.loaded::before { display: none; }
-    </style>
 </body>
 </html>
