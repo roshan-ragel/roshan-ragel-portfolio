@@ -1,25 +1,45 @@
 // Mobile menu toggle
 function toggleMenu() {
     const navLinks = document.getElementById('navLinks');
-    navLinks.classList.toggle('active');
+    const btn = document.querySelector('.mobile-menu-btn');
+    const isOpen = navLinks.classList.toggle('open');
+    btn.textContent = isOpen ? '✕' : '☰';
+    btn.setAttribute('aria-expanded', isOpen);
 }
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', function(event) {
     const nav = document.querySelector('nav');
-    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const btn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.getElementById('navLinks');
-    
-    if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
+
+    if (!nav.contains(event.target) && navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+        if (btn) {
+            btn.textContent = '☰';
+            btn.setAttribute('aria-expanded', 'false');
+        }
     }
+});
+
+// Close menu when a nav link is clicked (mobile)
+document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function() {
+        const navLinks = document.getElementById('navLinks');
+        const btn = document.querySelector('.mobile-menu-btn');
+        navLinks.classList.remove('open');
+        if (btn) {
+            btn.textContent = '☰';
+            btn.setAttribute('aria-expanded', 'false');
+        }
+    });
 });
 
 // Active navigation highlighting
 document.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-links a');
-    
+
     navLinks.forEach(link => {
         if (link.getAttribute('href') === currentPage) {
             link.classList.add('active');
@@ -60,32 +80,3 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
 });
-```
-
-## **Why You Don't Need to Change `script.js`:**
-
-✅ **Mobile menu toggle** - Works for all pages  
-✅ **Active navigation highlighting** - Automatically detects current page  
-✅ **Smooth scroll** - Works for anchor links  
-✅ **Fade-in animations** - Works with Intersection Observer  
-
-The `resources.html` and `supervision.html` files I created already include their **own inline JavaScript** for:
-- API fetching (resources.html)
-- Batch toggling (resources.html)
-- No additional JS needed (supervision.html)
-
----
-
-## **Your Complete File Structure:**
-```
-roshan-ragel-portfolio/
-├── index.html
-├── about.html
-├── publications.html
-├── supervision.html       ← NEW (with students)
-├── podcasts.html
-├── videos.html
-├── speaking.html
-├── resources.html         ← UPDATED (with API projects)
-├── styles.css
-└── script.js              ← NO CHANGES NEEDED
