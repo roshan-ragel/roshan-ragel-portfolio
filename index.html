@@ -47,7 +47,6 @@
         .hero-content {
             position: relative; z-index: 4;
             text-align: center; padding: 2rem;
-            /* ✅ FIX 1: wider container */
             max-width: 1100px;
             width: 100%;
         }
@@ -65,7 +64,6 @@
             to   { opacity:1; transform:translateY(0); }
         }
 
-        /* ✅ FIX 2: white-space:nowrap + responsive font-size */
         .hero-name {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.8rem, 6vw, 4.8rem);
@@ -204,6 +202,71 @@
             .hero-name { white-space: normal; }
         }
 
+        /* =====================
+           MOBILE MENU STYLES
+        ===================== */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.4rem 0.6rem;
+            line-height: 1;
+            transition: color 0.2s;
+            z-index: 1001;
+        }
+        .mobile-menu-btn:hover { color: #d4af37; }
+        .mobile-menu-btn.active { color: #d4af37; }
+
+        @media (max-width: 900px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 8, 6, 0.98);
+                border-top: 1px solid rgba(212,175,55,0.2);
+                padding: 0.5rem 0 1rem;
+                z-index: 1000;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+                letter-spacing: 0.15em;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                transition: color 0.2s, background 0.2s;
+            }
+
+            .nav-links li:last-child a {
+                border-bottom: none;
+            }
+
+            .nav-links li a:hover {
+                color: #d4af37;
+                background: rgba(212,175,55,0.06);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -211,7 +274,7 @@
     <nav>
         <div class="nav-content">
             <a href="index.html" class="logo">Roshan G. Ragel</a>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="about.html">About</a></li>
                 <li><a href="publications.html">Publications</a></li>
@@ -272,41 +335,113 @@
 
     <script src="script.js"></script>
     <script>
+    /* =====================
+       MOBILE MENU TOGGLE
+    ===================== */
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        const btn = document.getElementById('mobileMenuBtn');
+        const isOpen = navLinks.classList.toggle('open');
+        btn.classList.toggle('active', isOpen);
+        btn.setAttribute('aria-expanded', isOpen);
+        btn.textContent = isOpen ? '✕' : '☰';
+    }
+
+    // Close menu when a nav link is clicked (for SPA-style navigation)
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            const navLinks = document.getElementById('navLinks');
+            const btn = document.getElementById('mobileMenuBtn');
+            navLinks.classList.remove('open');
+            btn.classList.remove('active');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.textContent = '☰';
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const nav = document.querySelector('nav');
+        const navLinks = document.getElementById('navLinks');
+        const btn = document.getElementById('mobileMenuBtn');
+        if (!nav.contains(e.target) && navLinks.classList.contains('open')) {
+            navLinks.classList.remove('open');
+            btn.classList.remove('active');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.textContent = '☰';
+        }
+    });
+
+    /* =====================
+       TYPEWRITER EFFECT
+    ===================== */
     (function () {
-        const PHRASES = ["EDUCATOR · RESEARCHER · LEADER","PROFESSOR OF COMPUTER ENGINEERING","EMBEDDED SYSTEMS · COMPUTER ARCHITECTURE","INSPIRING THE NEXT GENERATION"];
+        const PHRASES = [
+            "EDUCATOR · RESEARCHER · LEADER",
+            "PROFESSOR OF COMPUTER ENGINEERING",
+            "EMBEDDED SYSTEMS · COMPUTER ARCHITECTURE",
+            "INSPIRING THE NEXT GENERATION"
+        ];
         const textEl = document.getElementById('typedText');
         const emailEl = document.getElementById('heroEmail');
         const socialEl = document.getElementById('heroSocials');
         const delay = ms => new Promise(r => setTimeout(r, ms));
         let emailShown = false;
-        async function typePhrase(str) { for (let i=1;i<=str.length;i++){textEl.textContent=str.slice(0,i);await delay(65);} }
-        async function erasePhrase() { const s=textEl.textContent; for(let i=s.length-1;i>=0;i--){textEl.textContent=s.slice(0,i);await delay(35);} }
+
+        async function typePhrase(str) {
+            for (let i = 1; i <= str.length; i++) {
+                textEl.textContent = str.slice(0, i);
+                await delay(65);
+            }
+        }
+        async function erasePhrase() {
+            const s = textEl.textContent;
+            for (let i = s.length - 1; i >= 0; i--) {
+                textEl.textContent = s.slice(0, i);
+                await delay(35);
+            }
+        }
         async function run() {
-            await delay(1800); let idx=0;
-            while(true){
+            await delay(1800);
+            let idx = 0;
+            while (true) {
                 await typePhrase(PHRASES[idx]);
-                if(!emailShown){emailShown=true;emailEl.classList.add('visible');socialEl.classList.add('visible');}
-                await delay(2000); await erasePhrase(); await delay(500);
-                idx=(idx+1)%PHRASES.length;
+                if (!emailShown) {
+                    emailShown = true;
+                    emailEl.classList.add('visible');
+                    socialEl.classList.add('visible');
+                }
+                await delay(2000);
+                await erasePhrase();
+                await delay(500);
+                idx = (idx + 1) % PHRASES.length;
             }
         }
         run();
     })();
+
+    /* =====================
+       HERO SLIDESHOW
+    ===================== */
     (function () {
-        const slides=document.querySelectorAll('.hero-slide');
-        const dots=document.querySelectorAll('.hero-dot');
-        let current=0;
-        function goToSlide(n){
-            const prev=current; current=((n%slides.length)+slides.length)%slides.length;
-            if(prev===current)return;
-            slides[prev].classList.remove('active'); slides[prev].classList.add('leaving');
-            if(dots[prev])dots[prev].classList.remove('active');
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.hero-dot');
+        let current = 0;
+
+        function goToSlide(n) {
+            const prev = current;
+            current = ((n % slides.length) + slides.length) % slides.length;
+            if (prev === current) return;
+            slides[prev].classList.remove('active');
+            slides[prev].classList.add('leaving');
+            if (dots[prev]) dots[prev].classList.remove('active');
             slides[current].classList.add('active');
-            if(dots[current])dots[current].classList.add('active');
-            setTimeout(()=>slides[prev].classList.remove('leaving'),1400);
+            if (dots[current]) dots[current].classList.add('active');
+            setTimeout(() => slides[prev].classList.remove('leaving'), 1400);
         }
-        window.goToSlide=goToSlide;
-        setInterval(()=>goToSlide(current+1),5000);
+
+        window.goToSlide = goToSlide;
+        setInterval(() => goToSlide(current + 1), 5000);
     })();
     </script>
 </body>
